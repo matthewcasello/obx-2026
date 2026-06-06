@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e7490">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Outer Banks 2026 — Casello Family Vacation</title>
+<meta name="description" content="Outer Banks Family Vacation 2026 — Outside-In, South Nags Head. June 20–27. Countdown, live beach report, house info, dinner crew & packing lists.">
+<meta property="og:title" content="Outer Banks Family Vacation 2026 🏖️">
+<meta property="og:description" content="Outside-In · South Nags Head, NC · June 20–27 — countdown, live beach report, dinner crew & more">
+<meta property="og:image" content="https://matthewcasello.github.io/obx-2026/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏖️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0e7490;
+    --ocean-deep: #155e75;
+    --teal: #2d9d9b;
+    --sky: #38bdf8;
+    --sand: #ead9c5;
+    --sand-soft: #f6ecdf;
+    --ink: #0f172a;
+    --ink-soft: #475569;
+    --card: rgba(255,255,255,0.93);
+    --radius: 20px;
+    --shadow: 0 8px 30px rgba(15,23,42,0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 35%, var(--sand-soft) 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 480px;
+    background: url('hero.jpg') center 38% / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(7,40,68,0.30) 0%, rgba(7,40,68,0.06) 35%, rgba(7,40,68,0.68) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 28px 24px 34px;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .hero-loc h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5.4vw, 3.2rem);
+    font-weight: 700; letter-spacing: -0.01em; line-height: 1.08;
+  }
+  .hero-loc .sub { font-size: 1.08rem; font-weight: 400; opacity: 0.94; margin-top: 6px; }
+  .hero-now { text-align: right; }
+  .hero-temp { font-size: clamp(3rem, 8vw, 4.4rem); font-weight: 300; line-height: 1; }
+  .hero-cond { font-size: 1.15rem; font-weight: 500; margin-top: 4px; }
+  .hero-chips { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; flex-wrap: wrap; }
+  .chip {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  /* ---------- Countdown banner ---------- */
+  .count-banner {
+    position: relative; z-index: 1;
+    background: linear-gradient(120deg, var(--ocean-deep), var(--teal));
+    color: #fff;
+  }
+  .count-inner {
+    max-width: 1060px; margin: 0 auto; padding: 16px 24px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .count-title { font-size: 1.05rem; font-weight: 700; }
+  .count-title .ct-sub { font-weight: 400; opacity: 0.85; font-size: 0.9rem; }
+  .count-units { display: flex; gap: 10px; }
+  .cu {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    min-width: 66px; padding: 7px 10px 8px; text-align: center;
+  }
+  .cu .n { font-size: 1.55rem; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .cu .l { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-top: 2px; }
+
+  /* ---------- Section nav ---------- */
+  .navbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(15,23,42,0.07);
+  }
+  .nav-inner {
+    max-width: 1060px; margin: 0 auto; padding: 9px 16px;
+    display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-inner a {
+    flex: 0 0 auto;
+    text-decoration: none; color: var(--ink-soft);
+    font-size: 0.85rem; font-weight: 700;
+    padding: 6px 13px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .nav-inner a:hover { background: #e0f2fe; color: var(--ocean-deep); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 22px 16px 40px; position: relative; z-index: 2; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    min-width: 0;
+  }
+  .card.full { grid-column: 1 / -1; }
+  .card.two { grid-column: span 2; }
+  .card h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .card h2 .ico { font-size: 1.1rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+    font-weight: 700; color: var(--ocean-deep);
+    margin: 34px 0 16px; display: flex; align-items: center; gap: 12px;
+    scroll-margin-top: 64px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--sand), transparent); }
+
+  /* ---------- Trip glance ---------- */
+  .glance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .gl {
+    text-align: center; padding: 16px 10px; border-radius: 14px;
+    background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+    border: 1px solid #bae6fd;
+  }
+  .gl .gi { font-size: 1.5rem; }
+  .gl .gt { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); margin-top: 6px; }
+  .gl .gv { font-size: 1.02rem; font-weight: 800; color: var(--ocean-deep); margin-top: 3px; line-height: 1.25; }
+  .gl .gs { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+  .gl a { color: inherit; }
+
+  /* ---------- Tides ---------- */
+  .tide-hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-bottom: 8px; }
+  .tide-next { font-size: 1.7rem; font-weight: 700; color: var(--ocean-deep); }
+  .tide-count { font-size: 1.05rem; color: var(--ink-soft); font-weight: 500; }
+  #tideChart { width: 100%; height: auto; display: block; margin-top: 4px; }
+  .tide-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .tide-pill {
+    background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+    border: 1px solid #bae6fd;
+    border-radius: 14px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .tide-pill.past { opacity: 0.45; }
+  .tide-pill .tt { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); }
+  .tide-pill .tv { font-size: 1.25rem; font-weight: 700; margin-top: 2px; }
+  .tide-pill .th { font-size: 0.8rem; color: var(--ink-soft); }
+
+  /* ---------- UV ---------- */
+  .uv-wrap { display: flex; flex-direction: column; align-items: center; }
+  .uv-gauge { width: 170px; height: 100px; }
+  .uv-val { font-size: 2.6rem; font-weight: 800; line-height: 1; margin-top: -54px; }
+  .uv-label { font-weight: 700; font-size: 1rem; margin-top: 4px; }
+  .uv-max { color: var(--ink-soft); font-size: 0.88rem; margin-top: 8px; }
+  .uv-advice { font-size: 0.85rem; color: var(--ink-soft); text-align: center; margin-top: 8px; line-height: 1.45; }
+  .uv-hourly {
+    display: flex; align-items: flex-end; justify-content: center; gap: 4px;
+    width: 100%; height: 86px; margin-top: 16px;
+    padding-top: 10px; border-top: 1px solid #e2e8f0;
+  }
+  .uvh-col { flex: 1 1 0; max-width: 26px; display: flex; flex-direction: column; align-items: center; gap: 3px; height: 100%; justify-content: flex-end; }
+  .uvh-num { font-size: 0.62rem; font-weight: 700; color: var(--ink-soft); line-height: 1; }
+  .uvh-bar { width: 100%; border-radius: 4px 4px 2px 2px; min-height: 3px; transition: height 0.8s ease; }
+  .uvh-col.now .uvh-bar { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .uvh-col.now .uvh-lbl { color: var(--ink); font-weight: 800; }
+  .uvh-lbl { font-size: 0.6rem; font-weight: 600; color: #94a3b8; line-height: 1; white-space: nowrap; }
+
+  /* ---------- Wind ---------- */
+  .wind-wrap { display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .compass { width: 120px; height: 120px; }
+  .wind-stats .ws-big { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+  .wind-stats .ws-big span { font-size: 1rem; font-weight: 500; color: var(--ink-soft); }
+  .wind-stats .ws-dir { font-size: 1.1rem; font-weight: 700; color: var(--ocean-deep); margin-top: 4px; }
+  .wind-stats .ws-gust { font-size: 0.88rem; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- Sun / details ---------- */
+  .detail-rows { display: flex; flex-direction: column; gap: 12px; }
+  .drow { display: flex; justify-content: space-between; align-items: center; font-size: 0.98rem; }
+  .drow .dl { color: var(--ink-soft); display: flex; align-items: center; gap: 8px; }
+  .drow .dv { font-weight: 700; }
+
+  /* ---------- Hourly ---------- */
+  .hourly { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .hr-item {
+    flex: 0 0 64px; text-align: center; padding: 10px 4px; border-radius: 14px;
+    background: linear-gradient(180deg, #f0f9ff, #fffbeb);
+    border: 1px solid #e0f2fe;
+  }
+  .hr-item.now { background: linear-gradient(180deg, #0e7490, #155e75); color: #fff; border-color: var(--ocean-deep); }
+  .hr-item.now .hr-uv { color: #fde68a; }
+  .hr-t { font-size: 0.75rem; font-weight: 600; opacity: 0.8; }
+  .hr-i { font-size: 1.3rem; margin: 4px 0; }
+  .hr-temp { font-size: 0.95rem; font-weight: 700; }
+  .hr-uv { font-size: 0.7rem; font-weight: 700; margin-top: 3px; color: var(--ink-soft); }
+
+  /* ---------- Alerts & callout ---------- */
+  .alert-banner {
+    background: #fffbeb; border: 1px solid #fcd34d; color: #92400e;
+    border-radius: 14px; padding: 11px 16px; margin-bottom: 12px;
+    font-size: 0.9rem; font-weight: 600; box-shadow: var(--shadow);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .alert-banner.severe { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
+  .alert-banner .ab-area { font-weight: 400; opacity: 0.8; font-size: 0.82rem; }
+  .callout {
+    background: linear-gradient(120deg, #0e7490, #0891b2 60%, #06b6d4);
+    color: #fff;
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px;
+  }
+  .callout .co-ico { font-size: 2rem; }
+  .callout .co-big { font-size: 1.18rem; font-weight: 700; }
+  .callout .co-sub { font-size: 0.92rem; opacity: 0.88; margin-top: 2px; }
+
+  /* ---------- Ocean ---------- */
+  .ocean-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .ostat {
+    text-align: center; padding: 14px 8px; border-radius: 14px;
+    background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+    border: 1px solid #bae6fd;
+  }
+  .ostat .ol { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); }
+  .ostat .ov { font-size: 1.7rem; font-weight: 800; color: var(--ocean-deep); margin-top: 4px; line-height: 1.1; }
+  .ostat .os { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+
+  /* ---------- 7-day ---------- */
+  .daily { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .day-card {
+    text-align: center; padding: 12px 4px 10px; border-radius: 14px;
+    background: linear-gradient(180deg, #f0f9ff, #fffbeb);
+    border: 1px solid #e0f2fe;
+  }
+  .day-card.today { background: linear-gradient(180deg, #0e7490, #155e75); color: #fff; border-color: var(--ocean-deep); }
+  .day-card.today .dy-lo, .day-card.today .dy-wind { color: rgba(255,255,255,0.75); }
+  .day-card.today .dy-rain { color: #bae6fd; }
+  .dy-name { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .dy-ico { font-size: 1.5rem; margin: 6px 0 4px; }
+  .dy-hi { font-size: 1.15rem; font-weight: 800; }
+  .dy-lo { font-size: 0.88rem; font-weight: 600; color: var(--ink-soft); }
+  .dy-rain { font-size: 0.75rem; font-weight: 700; color: var(--ocean); margin-top: 5px; }
+  .dy-uv { font-size: 0.7rem; font-weight: 800; margin-top: 4px; }
+  .dy-uv span { display: inline-block; padding: 1px 7px; border-radius: 999px; color: #fff; }
+  .dy-wind { font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- House ---------- */
+  .amenities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .am {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--sand-soft), #fff);
+    border: 1px solid #e7d8c2;
+    font-size: 0.9rem; font-weight: 600;
+  }
+  .am .ai { font-size: 1.3rem; }
+  .levels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 4px; }
+  .level {
+    border-radius: 14px; padding: 14px 16px;
+    background: linear-gradient(135deg, #ecfeff, #f0f9ff);
+    border: 1px solid #bae6fd;
+  }
+  .level .lt { font-weight: 800; color: var(--ocean-deep); font-size: 0.95rem; }
+  .level .ld { font-size: 0.87rem; color: var(--ink-soft); margin-top: 5px; line-height: 1.55; }
+
+  /* ---------- Gallery ---------- */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .gallery img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    border-radius: 12px; cursor: pointer; display: block;
+    background: #dbeafe;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .gallery img:hover { transform: scale(1.025); box-shadow: var(--shadow); }
+  .gal-more { text-align: center; margin-top: 14px; }
+  .gal-more button {
+    font-family: inherit; font-size: 0.9rem; font-weight: 700;
+    color: var(--ocean-deep); background: #e0f2fe; border: 1px solid #bae6fd;
+    border-radius: 999px; padding: 9px 22px; cursor: pointer;
+  }
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(7,20,35,0.93);
+    display: none; align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 94vw; max-height: 88vh; border-radius: 10px; }
+  .lb-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.12); color: #fff; border: none;
+    font-size: 1.6rem; width: 48px; height: 48px; border-radius: 50%;
+    cursor: pointer; line-height: 1;
+  }
+  .lb-prev { left: 14px; } .lb-next { right: 14px; }
+  .lb-close { position: absolute; top: 16px; right: 18px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
+  .lb-count { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.8); font-size: 0.85rem; font-weight: 600; }
+
+  /* ---------- Crew ---------- */
+  .crew { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .person {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--sand-soft), #fff);
+    border: 1px solid #e7d8c2;
+  }
+  .person .pi {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--ocean-deep));
+    color: #fff; font-weight: 800; font-size: 0.92rem;
+    display: flex; align-items: center; justify-content: center; flex: 0 0 36px;
+  }
+  .person .pn { font-weight: 700; font-size: 0.92rem; line-height: 1.2; }
+
+  /* ---------- Tables (dinners) ---------- */
+  table.sched { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+  table.sched th {
+    background: var(--teal); color: #fff;
+    font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 9px 12px; text-align: left;
+  }
+  table.sched th:first-child { border-radius: 10px 0 0 10px; }
+  table.sched th:last-child { border-radius: 0 10px 10px 0; }
+  table.sched td {
+    background: linear-gradient(135deg, #fdfaf5, #fff);
+    border-top: 1px solid #ead9c5; border-bottom: 1px solid #ead9c5;
+    padding: 11px 12px; font-size: 0.92rem; vertical-align: middle;
+  }
+  table.sched td:first-child { border-left: 1px solid #ead9c5; border-radius: 12px 0 0 12px; font-weight: 800; color: var(--ocean-deep); white-space: nowrap; }
+  table.sched td:last-child { border-right: 1px solid #ead9c5; border-radius: 0 12px 12px 0; }
+  table.sched tr.tonight td { background: linear-gradient(135deg, #ecfeff, #e0f2fe); border-color: #7dd3fc; }
+  .cook { font-weight: 700; color: var(--teal); white-space: nowrap; }
+  .meal-note { font-size: 0.86rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.5; }
+
+  /* ---------- Packing ---------- */
+  .packing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pack {
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid #e7d8c2; background: #fff;
+  }
+  .pack .ph { background: var(--teal); color: #fff; font-weight: 800; padding: 9px 14px; font-size: 0.92rem; }
+  .pack ul { list-style: none; padding: 10px 14px 12px; }
+  .pack li { font-size: 0.88rem; padding: 3px 0; color: var(--ink-soft); }
+  .pack li::before { content: '☐ '; color: var(--teal); font-weight: 700; }
+
+  /* ---------- Local guide ---------- */
+  .guide { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .spot {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 14px 16px; border-radius: 14px;
+    background: linear-gradient(135deg, #fdfaf5, #fff);
+    border: 1px solid #e7d8c2;
+  }
+  .spot .si { font-size: 1.7rem; line-height: 1; }
+  .spot .sn { font-weight: 800; font-size: 0.98rem; }
+  .spot .sn .sd-dist { font-weight: 600; font-size: 0.76rem; color: var(--teal); margin-left: 6px; }
+  .spot .sd { font-size: 0.86rem; color: var(--ink-soft); margin-top: 3px; line-height: 1.5; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 1060px; margin: 0 auto; padding: 0 16px 44px;
+    text-align: center; color: var(--ink-soft); font-size: 0.8rem; line-height: 1.7;
+  }
+  footer a { color: var(--ocean); text-decoration: none; }
+  .updated {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--card); border-radius: 999px; padding: 6px 16px;
+    box-shadow: var(--shadow); font-weight: 600; color: var(--ink-soft); font-size: 0.82rem;
+    margin-bottom: 10px;
+  }
+  .pulse { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2.5s infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+  .err {
+    background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c;
+    border-radius: 12px; padding: 10px 14px; font-size: 0.88rem; margin-bottom: 14px;
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .card.two { grid-column: 1 / -1; }
+    .hero { min-height: 360px; background-position: center 42%; }
+    .hero-now { text-align: left; }
+    .hero-chips { justify-content: flex-start; }
+    .hero-content { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 18px 24px; }
+    .count-inner { justify-content: center; text-align: center; }
+    .cu { min-width: 58px; }
+    .wrap { padding: 16px 10px 32px; }
+    .card { padding: 16px 14px; border-radius: 16px; }
+    .glance { grid-template-columns: repeat(2, 1fr); }
+    .tide-hero { gap: 4px 12px; margin-bottom: 4px; }
+    .tide-next { font-size: 1.3rem; }
+    .tide-count { font-size: 0.95rem; }
+    .tide-table { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .tide-pill { padding: 8px 10px; }
+    .tide-pill .tv { font-size: 1.1rem; }
+    .uv-hourly { gap: 3px; height: 78px; }
+    .uvh-num { font-size: 0.58rem; }
+    .wind-wrap { gap: 14px; }
+    .compass { width: 104px; height: 104px; }
+    .hr-item { flex: 0 0 58px; }
+    .ocean-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .ostat .ov { font-size: 1.45rem; }
+    .daily { display: flex; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .day-card { flex: 0 0 96px; }
+    .callout { padding: 14px 16px; gap: 12px; }
+    .callout .co-big { font-size: 1.02rem; }
+    .callout .co-sub { font-size: 0.85rem; }
+    .amenities { grid-template-columns: repeat(2, 1fr); }
+    .levels { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .crew { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .packing { grid-template-columns: 1fr; }
+    .guide { grid-template-columns: 1fr; }
+    table.sched { font-size: 0.86rem; }
+    table.sched td, table.sched th { padding: 8px 9px; }
+    footer { padding: 0 14px 36px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-loc">
+      <h1>Outer Banks Family<br>Vacation 2026 🏖️</h1>
+      <div class="sub">Outside-In · South Nags Head, NC · June 20 – 27</div>
+    </div>
+    <div class="hero-now">
+      <div class="hero-temp"><span id="curTemp">--</span>°</div>
+      <div class="hero-cond" id="curCond">—</div>
+      <div class="hero-chips">
+        <div class="chip" id="chipHi">H --°</div>
+        <div class="chip" id="chipLo">L --°</div>
+        <div class="chip" id="chipRain">💧 --%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="count-banner">
+  <div class="count-inner" id="countInner">
+    <div class="count-title" id="countTitle">Countdown to check-in <span class="ct-sub" id="countSub">· Sat June 20, 4:00 pm</span></div>
+    <div class="count-units" id="countUnits">
+      <div class="cu"><div class="n" id="cdD">--</div><div class="l">days</div></div>
+      <div class="cu"><div class="n" id="cdH">--</div><div class="l">hours</div></div>
+      <div class="cu"><div class="n" id="cdM">--</div><div class="l">mins</div></div>
+      <div class="cu"><div class="n" id="cdS">--</div><div class="l">secs</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="navbar">
+  <div class="nav-inner">
+    <a href="#beach">🌊 Beach Report</a>
+    <a href="#house">🏠 The House</a>
+    <a href="#photos">📸 Photos</a>
+    <a href="#crew">👨‍👩‍👧‍👦 The Crew</a>
+    <a href="#dinners">🍽️ Dinners</a>
+    <a href="#packing">🧳 Packing</a>
+    <a href="#guide">🗺️ Local Guide</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ===== Trip at a glance ===== -->
+  <div class="card full">
+    <h2><span class="ico">🗓️</span> Trip at a Glance</h2>
+    <div class="glance">
+      <div class="gl">
+        <div class="gi">🔑</div>
+        <div class="gt">Check-in</div>
+        <div class="gv">Sat, June 20</div>
+        <div class="gs">4–6 pm · keyless code texted</div>
+      </div>
+      <div class="gl">
+        <div class="gi">👋</div>
+        <div class="gt">Check-out</div>
+        <div class="gv">Sat, June 27</div>
+        <div class="gs">out by 10 am</div>
+      </div>
+      <div class="gl">
+        <div class="gi">📍</div>
+        <div class="gt">Address</div>
+        <div class="gv"><a href="https://maps.google.com/?q=9101+S+Old+Oregon+Inlet+Rd,+Nags+Head,+NC+27959" target="_blank" rel="noopener">9101 S Old Oregon Inlet Rd</a></div>
+        <div class="gs">South Nags Head, NC 27959</div>
+      </div>
+      <div class="gl">
+        <div class="gi">🏄</div>
+        <div class="gt">The Plan</div>
+        <div class="gv">Beach &amp; Pool</div>
+        <div class="gs">every single day ☀️</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Live beach report ===== -->
+  <div class="section-title" id="beach">🌊 Live Beach Report</div>
+  <div class="err" id="errBox"></div>
+  <div id="alerts"></div>
+  <div class="grid">
+
+    <div class="card full callout" id="bestWindow" style="display:none">
+      <span class="co-ico">🏖️</span>
+      <div>
+        <div class="co-big" id="bwTitle"></div>
+        <div class="co-sub" id="bwDetail"></div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">🌊</span> Tides — Jennette's Pier, Nags Head (NOAA 8652226)</h2>
+      <div class="tide-hero">
+        <div class="tide-next" id="tideNext">—</div>
+        <div class="tide-count" id="tideCount"></div>
+      </div>
+      <svg id="tideChart" viewBox="0 0 1000 240"></svg>
+      <div class="tide-table" id="tideTable"></div>
+    </div>
+
+    <div class="card full" id="oceanCard" style="display:none">
+      <h2><span class="ico">🏄</span> Water &amp; Surf</h2>
+      <div class="ocean-stats">
+        <div class="ostat"><div class="ol">Water Temp</div><div class="ov" id="seaTemp">--°</div><div class="os" id="seaFeel"></div></div>
+        <div class="ostat"><div class="ol">Wave Height</div><div class="ov" id="waveHt">--</div><div class="os">feet</div></div>
+        <div class="ostat"><div class="ol">Wave Period</div><div class="ov" id="wavePd">--</div><div class="os">seconds</div></div>
+        <div class="ostat"><div class="ol">Swell From</div><div class="ov" id="waveDir">--</div><div class="os" id="waveDirDeg"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">☀️</span> UV Index</h2>
+      <div class="uv-wrap">
+        <svg class="uv-gauge" viewBox="0 0 200 110">
+          <path d="M 16 100 A 84 84 0 0 1 184 100" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+          <path id="uvArc" d="M 16 100 A 84 84 0 0 1 184 100" fill="none" stroke="#4ade80" stroke-width="14" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="264" style="transition: stroke-dashoffset 1s ease, stroke 1s ease"/>
+        </svg>
+        <div class="uv-val" id="uvVal">–</div>
+        <div class="uv-label" id="uvLabel"></div>
+        <div class="uv-max" id="uvMax"></div>
+        <div class="uv-advice" id="uvAdvice"></div>
+        <div class="uv-hourly" id="uvHourly"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">🌬️</span> Wind</h2>
+      <div class="wind-wrap">
+        <svg class="compass" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="#f0f9ff" stroke="#bae6fd" stroke-width="2"/>
+          <text x="60" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">N</text>
+          <text x="109" y="64" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">E</text>
+          <text x="60" y="113" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">S</text>
+          <text x="11" y="64" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">W</text>
+          <g id="windArrow" style="transform-origin: 60px 60px; transition: transform 1s ease">
+            <path d="M 60 24 L 68 56 L 60 50 L 52 56 Z" fill="#0e7490"/>
+            <line x1="60" y1="52" x2="60" y2="92" stroke="#0e7490" stroke-width="4" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="wind-stats">
+          <div class="ws-big"><span id="windSpd">--</span> <span>mph</span></div>
+          <div class="ws-dir" id="windDir">—</div>
+          <div class="ws-gust" id="windGust"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">🌅</span> Sun &amp; Sky</h2>
+      <div class="detail-rows">
+        <div class="drow"><span class="dl">🌅 Sunrise</span><span class="dv" id="sunrise">--</span></div>
+        <div class="drow"><span class="dl">🌇 Sunset</span><span class="dv" id="sunset">--</span></div>
+        <div class="drow"><span class="dl">💧 Humidity</span><span class="dv" id="humidity">--</span></div>
+        <div class="drow"><span class="dl">🌧️ Rain chance</span><span class="dv" id="rainChance">--</span></div>
+        <div class="drow"><span class="dl"><span id="moonIco">🌙</span> Moon</span><span class="dv" id="moonPhase">--</span></div>
+        <div class="drow"><span class="dl">✨ Illumination</span><span class="dv" id="moonIllum">--</span></div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">🕐</span> Next 12 Hours</h2>
+      <div class="hourly" id="hourly"></div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">📅</span> 7-Day Forecast</h2>
+      <div class="daily" id="daily"></div>
+    </div>
+
+  </div>
+
+  <!-- ===== The House ===== -->
+  <div class="section-title" id="house">🏠 The House — "Outside-In"</div>
+  <div class="grid">
+    <div class="card full">
+      <h2><span class="ico">✨</span> 8 Bedrooms · 8.5 Baths · Oceanfront walkway
+        <span style="margin-left:auto; text-transform:none; letter-spacing:0; font-weight:600;"><a href="https://www.beachrealtync.com/outer-banks-rentals/outside" target="_blank" rel="noopener" style="color:var(--ocean)">Full listing ↗</a></span>
+      </h2>
+      <div class="amenities">
+        <div class="am"><span class="ai">🏊</span> Private 18×32 pool</div>
+        <div class="am"><span class="ai">🛁</span> Hot tub cabana</div>
+        <div class="am"><span class="ai">🏖️</span> Private beach walkway</div>
+        <div class="am"><span class="ai">🛗</span> Elevator</div>
+        <div class="am"><span class="ai">🎬</span> Home theater room</div>
+        <div class="am"><span class="ai">🎱</span> Pool table &amp; arcade</div>
+        <div class="am"><span class="ai">🏒</span> Air hockey &amp; foosball</div>
+        <div class="am"><span class="ai">🍹</span> Outdoor bar &amp; dining</div>
+        <div class="am"><span class="ai">🍔</span> Gas grill</div>
+        <div class="am"><span class="ai">🧺</span> 2 washers &amp; dryers</div>
+        <div class="am"><span class="ai">🍽️</span> 2 dishwashers · 2 fridges</div>
+        <div class="am"><span class="ai">📶</span> WiFi &amp; keyless entry</div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">🗺️</span> Level by Level</h2>
+      <div class="levels">
+        <div class="level">
+          <div class="lt">☀️ Outdoor Ground Level</div>
+          <div class="ld">Bar &amp; dining area, custom pool, hot tub cabana, private walkway straight to the beach.</div>
+        </div>
+        <div class="level">
+          <div class="lt">🚪 Indoor Ground Level</div>
+          <div class="ld">Living area with kitchenette, half bath, two showers — rinse off and refuel without tracking sand upstairs.</div>
+        </div>
+        <div class="level">
+          <div class="lt">🛏️ Mid Level</div>
+          <div class="ld">Rec room (pool table, arcade, foosball, shuffleboard, air hockey), four master bedrooms with en-suites, covered deck. Beds: 2 Kings, 2 Queens, Queen w/ lofted Twin, Bunk w/ Twin.</div>
+        </div>
+        <div class="level">
+          <div class="lt">🌅 Upper Level</div>
+          <div class="ld">Great room, dining area, kitchen, sports bar, home theater, powder room, plus two King master bedrooms.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Photos ===== -->
+  <div class="section-title" id="photos">📸 Take the Tour</div>
+  <div class="card full">
+    <div class="gallery" id="gallery"></div>
+    <div class="gal-more"><button id="galMoreBtn">Show all 40 photos</button></div>
+  </div>
+
+  <!-- ===== Crew ===== -->
+  <div class="section-title" id="crew">👨‍👩‍👧‍👦 The Crew — 16 Strong</div>
+  <div class="card full">
+    <div class="crew" id="crewGrid"></div>
+  </div>
+
+  <!-- ===== Dinners ===== -->
+  <div class="section-title" id="dinners">🍽️ Dinner Crew Schedule</div>
+  <div class="card full">
+    <table class="sched" id="dinnerTable">
+      <thead><tr><th>Day</th><th>Chef(s)</th><th>On the Menu</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="meal-note">🥞 <b>Breakfast &amp; lunch:</b> on your own — but if you're making something to share, put it out and shout! (per Jess's official planning document 😄)</div>
+  </div>
+
+  <!-- ===== Packing ===== -->
+  <div class="section-title" id="packing">🧳 Community Packing List</div>
+  <div class="card full">
+    <div class="packing" id="packGrid"></div>
+    <div class="meal-note">Everything else (clothes, sunscreen, beach chairs…) is per-family. This list is the shared-supplies divvy-up.</div>
+  </div>
+
+  <!-- ===== Local guide ===== -->
+  <div class="section-title" id="guide">🗺️ Around South Nags Head</div>
+  <div class="card full">
+    <div class="guide">
+      <div class="spot"><span class="si">🐟</span><div><div class="sn">Fish Heads Bar &amp; Grill <span class="sd-dist">~2 min · walkable</span></div><div class="sd">Right on the Outer Banks Fishing Pier, two blocks up the beach road. Casual eats, drinks over the water, live music — the closest "we don't feel like cooking" option.</div></div></div>
+      <div class="spot"><span class="si">🗼</span><div><div class="sn">Bodie Island Lighthouse <span class="sd-dist">~10 min south</span></div><div class="sd">Classic black-and-white striped lighthouse with a boardwalk over the marsh. Climbing tickets in season; great for a low-key morning.</div></div></div>
+      <div class="spot"><span class="si">🚤</span><div><div class="sn">Oregon Inlet Fishing Center <span class="sd-dist">~10 min south</span></div><div class="sd">Charter fishing fleet HQ. Even without booking a boat, watching the catch come in around 4pm is free entertainment.</div></div></div>
+      <div class="spot"><span class="si">🎣</span><div><div class="sn">Jennette's Pier <span class="sd-dist">~12 min north</span></div><div class="sd">Concrete pier with aquarium-run exhibits — and the source of this page's tide data. Walk-on pass is a couple bucks.</div></div></div>
+      <div class="spot"><span class="si">🏜️</span><div><div class="sn">Jockey's Ridge State Park <span class="sd-dist">~15 min north</span></div><div class="sd">Tallest sand dunes on the East Coast. Go for sunset — kids and dogs love running down the dunes. Free.</div></div></div>
+      <div class="spot"><span class="si">🍦</span><div><div class="sn">Surfin' Spoon <span class="sd-dist">~12 min north</span></div><div class="sd">The OBX frozen yogurt institution, owned by pro surfer Jesse Hines. Expect a line — worth it.</div></div></div>
+      <div class="spot"><span class="si">🥓</span><div><div class="sn">Sam &amp; Omie's <span class="sd-dist">~12 min north</span></div><div class="sd">Serving breakfast to fishermen since 1937. Get there early; the she-crab soup and biscuits are the move.</div></div></div>
+      <div class="spot"><span class="si">⛳</span><div><div class="sn">Mutiny Bay Adventure Golf <span class="sd-dist">~15 min north</span></div><div class="sd">Pirate-themed mini golf with flaming torches at night. Reliable crowd-pleaser for the teen contingent.</div></div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="updated"><span class="pulse"></span> <span id="updated">Loading…</span> · auto-refreshes every 5 min</div><br>
+  Tides: <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8652226" target="_blank" rel="noopener">NOAA — Jennette's Pier</a>
+  · Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+  · House: <a href="https://www.beachrealtync.com/outer-banks-rentals/outside" target="_blank" rel="noopener">Beach Realty &amp; Construction</a><br>
+  Itinerary &amp; planning by Jess 💙 · Site by Matt
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev">‹</button>
+  <img id="lbImg" alt="Outside-In property photo">
+  <button class="lb-btn lb-next" id="lbNext">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script>
+const LAT = 35.832, LON = -75.561, STATION = '8652226';
+const CHECKIN = new Date('2026-06-20T16:00:00-04:00');
+const CHECKOUT = new Date('2026-06-27T10:00:00-04:00');
+
+/* ---------- Countdown ---------- */
+function tickCountdown() {
+  const now = new Date();
+  const title = document.getElementById('countTitle');
+  const units = document.getElementById('countUnits');
+  if (now < CHECKIN) {
+    let ms = CHECKIN - now;
+    const d = Math.floor(ms / 86400000); ms -= d * 86400000;
+    const h = Math.floor(ms / 3600000);  ms -= h * 3600000;
+    const m = Math.floor(ms / 60000);    ms -= m * 60000;
+    const s = Math.floor(ms / 1000);
+    document.getElementById('cdD').textContent = d;
+    document.getElementById('cdH').textContent = h;
+    document.getElementById('cdM').textContent = m;
+    document.getElementById('cdS').textContent = s;
+  } else if (now < CHECKOUT) {
+    const dayN = Math.floor((now - new Date('2026-06-20T00:00:00-04:00')) / 86400000) + 1;
+    title.innerHTML = `🎉 We're here! Day ${dayN} of 8 <span class="ct-sub">· soak it up</span>`;
+    units.style.display = 'none';
+  } else {
+    title.innerHTML = `That's a wrap on OBX 2026 🌅 <span class="ct-sub">· until next year</span>`;
+    units.style.display = 'none';
+  }
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* ---------- Crew ---------- */
+const CREW = [
+  'Marion Sampson','Suzanne Casello','Albert Sampson','Maria Sampson',
+  'Steph Toplinski','Myles Fabritz','Will Toplinski','Mia Fabritz',
+  'Bella Fabritz','Jess Casello','Matt Casello','Logan Casello',
+  'Kennedy Casello','Steven Casello','Annette Garzone','Gi Caruso',
+];
+const crewBox = document.getElementById('crewGrid');
+CREW.forEach(name => {
+  const initials = name.split(' ').map(w => w[0]).join('');
+  const div = document.createElement('div');
+  div.className = 'person';
+  div.innerHTML = `<div class="pi">${initials}</div><div class="pn">${name}</div>`;
+  crewBox.appendChild(div);
+});
+
+/* ---------- Dinners ---------- */
+const DINNERS = [
+  ['Sat 6/20', 'Marion', 'Lasagna, garlic knots, salad & dessert', '2026-06-20'],
+  ['Sun 6/21', 'Suzanne', 'Take out — pizza & cheesesteaks', '2026-06-21'],
+  ['Mon 6/22', 'Steven & Annette', "Chef's choice 🤫", '2026-06-22'],
+  ['Tue 6/23', 'Albert & Maria', 'Spiraled ham, baked beans, sweet potatoes, salads', '2026-06-23'],
+  ['Wed 6/24', 'Matt & Jess', 'Grilled chicken, salad, corn on the cob & garlic bread', '2026-06-24'],
+  ['Thu 6/25', 'Steph & Myles', 'Creamy parmesan bacon pasta & fresh garden salad', '2026-06-25'],
+  ['Fri 6/26', 'Everyone', 'Leftovers night — clean out those fridges', '2026-06-26'],
+  ['Sat 6/27', '—', 'Departure by 10 am 👋', '2026-06-27'],
+];
+const tbody = document.querySelector('#dinnerTable tbody');
+const todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+DINNERS.forEach(([day, cook, meal, date]) => {
+  const tr = document.createElement('tr');
+  if (date === todayStr) tr.className = 'tonight';
+  tr.innerHTML = `<td>${day}</td><td class="cook">${cook}</td><td>${meal}</td>`;
+  tbody.appendChild(tr);
+});
+
+/* ---------- Packing ---------- */
+const PACKING = [
+  ['Marion', ['First aid kit','Game – Perfection','Game – Cards','Game – Spoons','Laundry detergent','Dryer sheets']],
+  ['Suzanne', ['Plastic silverware','Tissues','Paper plates','Napkins','Coffee filters','Coffee']],
+  ['Albert & Maria', ['Paper towels','Toilet paper','Olive oil','Vinegar','Garlic powder','Oregano']],
+  ['Steph & Myles', ['Plastic cups','Paper bowls','Counter spray','Hand soap','Salt & pepper','Bug spray','Aloe']],
+  ['Jess & Matt', ['Ziplock bags','Trash bags','Sponge','Dish soap','Dishwasher pods','Clorox wipes','Beach cooler','Beach speaker']],
+  ['Steven & Annette', ['TBD — lucky ducks 🦆']],
+];
+const packBox = document.getElementById('packGrid');
+PACKING.forEach(([fam, items]) => {
+  const div = document.createElement('div');
+  div.className = 'pack';
+  div.innerHTML = `<div class="ph">${fam}</div><ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+  packBox.appendChild(div);
+});
+
+/* ---------- Gallery ---------- */
+const PHOTO_IDS = Array.from({length: 40}, (_, i) => 166944844 + i);
+const PREVIEW_COUNT = 8;
+const gal = document.getElementById('gallery');
+let galExpanded = false;
+function renderGallery() {
+  gal.innerHTML = '';
+  const ids = galExpanded ? PHOTO_IDS : PHOTO_IDS.slice(0, PREVIEW_COUNT);
+  ids.forEach((id, idx) => {
+    const img = document.createElement('img');
+    img.src = `photos/img_${id}.jpeg`;
+    img.loading = 'lazy';
+    img.alt = 'Outside-In property photo';
+    img.addEventListener('click', () => openLightbox(idx));
+    gal.appendChild(img);
+  });
+  document.getElementById('galMoreBtn').textContent =
+    galExpanded ? 'Show fewer' : `Show all ${PHOTO_IDS.length} photos`;
+}
+document.getElementById('galMoreBtn').addEventListener('click', () => {
+  galExpanded = !galExpanded;
+  renderGallery();
+  if (!galExpanded) document.getElementById('photos').scrollIntoView();
+});
+renderGallery();
+
+/* ---------- Lightbox ---------- */
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+let lbIdx = 0;
+function openLightbox(i) { lbIdx = i; updateLb(); lb.classList.add('open'); }
+function updateLb() {
+  lbImg.src = `photos/img_${PHOTO_IDS[lbIdx]}.jpeg`;
+  document.getElementById('lbCount').textContent = `${lbIdx + 1} / ${PHOTO_IDS.length}`;
+}
+function lbStep(d) { lbIdx = (lbIdx + d + PHOTO_IDS.length) % PHOTO_IDS.length; updateLb(); }
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); lbStep(-1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); lbStep(1); });
+document.getElementById('lbClose').addEventListener('click', () => lb.classList.remove('open'));
+lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowLeft') lbStep(-1);
+  if (e.key === 'ArrowRight') lbStep(1);
+});
+let touchX = null;
+lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) lbStep(dx < 0 ? 1 : -1);
+  touchX = null;
+}, { passive: true });
+
+/* ---------- Live weather & tides ---------- */
+const WMO = {
+  0:['☀️','Sunny'],1:['🌤️','Mostly Sunny'],2:['⛅','Partly Cloudy'],3:['☁️','Cloudy'],
+  45:['🌫️','Foggy'],48:['🌫️','Foggy'],
+  51:['🌦️','Light Drizzle'],53:['🌦️','Drizzle'],55:['🌧️','Heavy Drizzle'],
+  56:['🌧️','Freezing Drizzle'],57:['🌧️','Freezing Drizzle'],
+  61:['🌧️','Light Rain'],63:['🌧️','Rain'],65:['🌧️','Heavy Rain'],
+  66:['🌧️','Freezing Rain'],67:['🌧️','Freezing Rain'],
+  71:['🌨️','Light Snow'],73:['🌨️','Snow'],75:['❄️','Heavy Snow'],77:['🌨️','Snow Grains'],
+  80:['🌦️','Light Showers'],81:['🌧️','Showers'],82:['⛈️','Heavy Showers'],
+  85:['🌨️','Snow Showers'],86:['🌨️','Snow Showers'],
+  95:['⛈️','Thunderstorm'],96:['⛈️','Thunderstorm'],99:['⛈️','Severe Thunderstorm']
+};
+const wmo = c => WMO[c] || ['🌡️','—'];
+
+const COMPASS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+const cardinal = d => COMPASS[Math.round(d / 22.5) % 16];
+
+const fmtTime = d => d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'}).toLowerCase().replace(' ','');
+const pad = n => String(n).padStart(2,'0');
+const yyyymmdd = d => `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+const parseLocal = s => new Date(s.replace(' ','T'));  // NOAA "YYYY-MM-DD HH:mm" → local
+
+function uvInfo(v) {
+  if (v < 3)  return ['#22c55e','Low','Minimal protection needed. Enjoy!'];
+  if (v < 6)  return ['#eab308','Moderate','SPF 30+, hat & sunglasses recommended.'];
+  if (v < 8)  return ['#f97316','High','SPF 30+, reapply every 2h. Seek shade midday.'];
+  if (v < 11) return ['#ef4444','Very High','Extra protection — shade 10am–4pm, SPF 50.'];
+  return ['#a855f7','Extreme','Avoid midday sun. SPF 50+, cover up.'];
+}
+
+async function fetchWeather() {
+  const u = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
+    `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,relative_humidity_2m` +
+    `&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset,precipitation_probability_max,weather_code,wind_speed_10m_max,wind_direction_10m_dominant` +
+    `&hourly=temperature_2m,uv_index,weather_code,precipitation_probability,wind_speed_10m` +
+    `&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York&forecast_days=7`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('weather ' + r.status);
+  return r.json();
+}
+
+async function fetchMarine() {
+  const u = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}` +
+    `&current=sea_surface_temperature,wave_height,wave_period,wave_direction` +
+    `&temperature_unit=fahrenheit&length_unit=imperial&timezone=America%2FNew_York`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('marine ' + r.status);
+  return r.json();
+}
+
+async function fetchAlerts() {
+  const r = await fetch(`https://api.weather.gov/alerts/active?point=${LAT},${LON}`);
+  if (!r.ok) throw new Error('alerts ' + r.status);
+  return r.json();
+}
+
+async function fetchTides(product, interval) {
+  const begin = new Date(Date.now() - 24*3600*1000);
+  let u = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?station=${STATION}` +
+    `&product=${product}&datum=MLLW&time_zone=lst_ldt&units=english&format=json` +
+    `&begin_date=${yyyymmdd(begin)}&range=72`;
+  if (interval) u += `&interval=${interval}`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('tides ' + r.status);
+  const j = await r.json();
+  if (!j.predictions) throw new Error('tides: no data');
+  return j.predictions;
+}
+
+function renderWeather(w) {
+  const c = w.current, d = w.daily;
+  const [icon, label] = wmo(c.weather_code);
+
+  document.getElementById('curTemp').textContent = Math.round(c.temperature_2m);
+  document.getElementById('curCond').textContent = `${icon} ${label}`;
+  document.getElementById('chipHi').textContent = `H ${Math.round(d.temperature_2m_max[0])}°`;
+  document.getElementById('chipLo').textContent = `L ${Math.round(d.temperature_2m_min[0])}°`;
+  document.getElementById('chipRain').textContent = `💧 ${d.precipitation_probability_max[0] ?? 0}%`;
+
+  // UV
+  const uv = Math.round(c.uv_index * 10) / 10;
+  const uvShown = Math.round(uv);
+  const [color, lbl, advice] = uvInfo(uvShown);
+  const frac = Math.min(uv / 11, 1);
+  const arc = document.getElementById('uvArc');
+  arc.style.strokeDashoffset = 264 * (1 - frac);
+  arc.style.stroke = color;
+  const uvEl = document.getElementById('uvVal');
+  uvEl.textContent = uvShown;
+  uvEl.style.color = color;
+  document.getElementById('uvLabel').textContent = lbl;
+  document.getElementById('uvLabel').style.color = color;
+  document.getElementById('uvMax').textContent = `Today's max: ${Math.round(d.uv_index_max[0])}`;
+  document.getElementById('uvAdvice').textContent = advice;
+
+  // Hourly UV bars — 7am to 7pm today
+  const uvBox = document.getElementById('uvHourly');
+  uvBox.innerHTML = '';
+  const nowHour = new Date().getHours();
+  w.hourly.time.forEach((t, i) => {
+    const dt = new Date(t);
+    if (dt.toDateString() !== new Date().toDateString()) return;
+    const h = dt.getHours();
+    if (h < 7 || h > 19) return;
+    const v = w.hourly.uv_index[i];
+    const [barColor] = uvInfo(Math.round(v));
+    const col = document.createElement('div');
+    col.className = 'uvh-col' + (h === nowHour ? ' now' : '');
+    const hl = h === 12 ? '12p' : h > 12 ? (h-12) + 'p' : h + 'a';
+    col.innerHTML = `
+      <div class="uvh-num">${Math.round(v) || ''}</div>
+      <div class="uvh-bar" style="height:${Math.max(Math.min(v/11,1)*100*0.62, 4)}%; background:${barColor}"></div>
+      <div class="uvh-lbl">${hl}</div>`;
+    uvBox.appendChild(col);
+  });
+
+  // Wind — arrow shows direction wind is blowing TOWARD
+  document.getElementById('windSpd').textContent = Math.round(c.wind_speed_10m);
+  document.getElementById('windDir').textContent = `from ${cardinal(c.wind_direction_10m)} (${Math.round(c.wind_direction_10m)}°)`;
+  document.getElementById('windGust').textContent = `Gusts ${Math.round(c.wind_gusts_10m)} mph`;
+  document.getElementById('windArrow').style.transform = `rotate(${(c.wind_direction_10m + 180) % 360}deg)`;
+
+  // Sun & sky
+  document.getElementById('sunrise').textContent = fmtTime(new Date(d.sunrise[0]));
+  document.getElementById('sunset').textContent = fmtTime(new Date(d.sunset[0]));
+  document.getElementById('humidity').textContent = `${c.relative_humidity_2m}%`;
+  document.getElementById('rainChance').textContent = `${d.precipitation_probability_max[0] ?? 0}%`;
+
+  // Hourly strip — next 12 hours
+  const now = new Date();
+  const hh = w.hourly;
+  let startIdx = hh.time.findIndex(t => new Date(t) >= now) - 1;
+  if (startIdx < 0) startIdx = 0;
+  const box = document.getElementById('hourly');
+  box.innerHTML = '';
+  for (let i = startIdx; i < Math.min(startIdx + 13, hh.time.length); i++) {
+    const t = new Date(hh.time[i]);
+    const [hi] = wmo(hh.weather_code[i]);
+    const isNow = i === startIdx;
+    const div = document.createElement('div');
+    div.className = 'hr-item' + (isNow ? ' now' : '');
+    div.innerHTML = `
+      <div class="hr-t">${isNow ? 'Now' : t.toLocaleTimeString('en-US',{hour:'numeric'}).toLowerCase()}</div>
+      <div class="hr-i">${hi}</div>
+      <div class="hr-temp">${Math.round(hh.temperature_2m[i])}°</div>
+      <div class="hr-uv">UV ${Math.round(hh.uv_index[i])}</div>`;
+    box.appendChild(div);
+  }
+}
+
+function renderDaily(w) {
+  const d = w.daily;
+  const box = document.getElementById('daily');
+  box.innerHTML = '';
+  d.time.forEach((t, i) => {
+    const dt = parseLocal(t + 'T12:00');
+    const [icon] = wmo(d.weather_code[i]);
+    const uvMax = Math.round(d.uv_index_max[i]);
+    const [uvColor] = uvInfo(uvMax);
+    const div = document.createElement('div');
+    div.className = 'day-card' + (i === 0 ? ' today' : '');
+    div.innerHTML = `
+      <div class="dy-name">${i === 0 ? 'Today' : dt.toLocaleDateString('en-US',{weekday:'short'})}</div>
+      <div class="dy-ico">${icon}</div>
+      <div class="dy-hi">${Math.round(d.temperature_2m_max[i])}°</div>
+      <div class="dy-lo">${Math.round(d.temperature_2m_min[i])}°</div>
+      <div class="dy-rain">💧 ${d.precipitation_probability_max[i] ?? 0}%</div>
+      <div class="dy-uv"><span style="background:${uvColor}">UV ${uvMax}</span></div>
+      <div class="dy-wind">${Math.round(d.wind_speed_10m_max[i])} mph ${cardinal(d.wind_direction_10m_dominant[i])}</div>`;
+    box.appendChild(div);
+  });
+}
+
+function renderOcean(m) {
+  if (!m || !m.current) return;
+  const c = m.current;
+  document.getElementById('oceanCard').style.display = '';
+  const wt = Math.round(c.sea_surface_temperature);
+  document.getElementById('seaTemp').textContent = wt + '°';
+  document.getElementById('seaFeel').textContent =
+    wt >= 72 ? 'great for swimming' : wt >= 65 ? 'refreshing' : wt >= 58 ? 'brisk — wetsuit weather' : 'cold!';
+  document.getElementById('waveHt').textContent = c.wave_height.toFixed(1);
+  document.getElementById('wavePd').textContent = Math.round(c.wave_period);
+  document.getElementById('waveDir').textContent = cardinal(c.wave_direction);
+  document.getElementById('waveDirDeg').textContent = Math.round(c.wave_direction) + '°';
+}
+
+function renderAlerts(a) {
+  const box = document.getElementById('alerts');
+  box.innerHTML = '';
+  if (!a || !a.features) return;
+  const seen = new Set();
+  a.features.forEach(f => {
+    const p = f.properties;
+    if (seen.has(p.event)) return;
+    seen.add(p.event);
+    const severe = ['Severe','Extreme'].includes(p.severity);
+    const div = document.createElement('div');
+    div.className = 'alert-banner' + (severe ? ' severe' : '');
+    div.innerHTML = `<span>${severe ? '🚨' : '⚠️'} ${p.event}</span>` +
+      `<span class="ab-area">until ${p.ends ? fmtTime(new Date(p.ends)) : 'further notice'}</span>`;
+    div.title = p.headline || '';
+    box.appendChild(div);
+  });
+}
+
+function renderBestWindow(w) {
+  // Score each beach-hour (8am-7pm); find the best 3h stretch today (or tomorrow if evening)
+  const now = new Date();
+  const hh = w.hourly;
+  const candidates = [];
+  hh.time.forEach((t, i) => {
+    const dt = new Date(t);
+    const h = dt.getHours();
+    if (h < 8 || h > 19 || dt < now) return;
+    const dayOffset = Math.floor((dt - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+    if (dayOffset > 1) return;  // today + tomorrow only
+    let score = 100;
+    score -= (hh.precipitation_probability[i] ?? 0) * 0.8;            // rain is the dealbreaker
+    score -= Math.abs(hh.temperature_2m[i] - 80) * 1.4;               // 80° is beach-perfect
+    score -= Math.max(hh.wind_speed_10m[i] - 14, 0) * 2;              // sandblasting penalty
+    candidates.push({ dt, i, score, dayOffset });
+  });
+  const el = document.getElementById('bestWindow');
+  // need a 3h run within the same day
+  let best = null;
+  for (let j = 0; j + 2 < candidates.length; j++) {
+    const [a, b, c] = [candidates[j], candidates[j+1], candidates[j+2]];
+    if (c.i - a.i !== 2 || a.dayOffset !== c.dayOffset) continue;
+    const total = a.score + b.score + c.score;
+    if (!best || total > best.total) best = { start: a, end: c, total };
+  }
+  if (!best) { el.style.display = 'none'; return; }
+  const s = best.start, e = best.end;
+  const fmtH = d => d.toLocaleTimeString('en-US', {hour:'numeric'}).toLowerCase();
+  const endT = new Date(e.dt.getTime() + 3600000);
+  const midI = best.start.i + 1;
+  document.getElementById('bwTitle').textContent =
+    `Best beach window${s.dayOffset === 1 ? ' tomorrow' : ''}: ${fmtH(s.dt)} – ${fmtH(endT)}`;
+  document.getElementById('bwDetail').textContent =
+    `${Math.round(hh.temperature_2m[midI])}° · UV ${Math.round(hh.uv_index[midI])} · ` +
+    `${hh.precipitation_probability[midI] ?? 0}% rain · wind ${Math.round(hh.wind_speed_10m[midI])} mph`;
+  el.style.display = '';
+}
+
+function renderMoon() {
+  // Phase from days since known new moon (2000-01-06 18:14 UTC), synodic month 29.53059d
+  const synodic = 29.530588853;
+  const age = ((Date.now()/86400000 - 10962.76) % synodic + synodic) % synodic;
+  const illum = Math.round((1 - Math.cos(2 * Math.PI * age / synodic)) / 2 * 100);
+  const phases = [
+    [1.85, '🌑', 'New Moon'], [5.54, '🌒', 'Waxing Crescent'], [9.23, '🌓', 'First Quarter'],
+    [12.92, '🌔', 'Waxing Gibbous'], [16.61, '🌕', 'Full Moon'], [20.30, '🌖', 'Waning Gibbous'],
+    [23.99, '🌗', 'Last Quarter'], [27.68, '🌘', 'Waning Crescent'], [99, '🌑', 'New Moon'],
+  ];
+  const [, ico, name] = phases.find(p => age < p[0]);
+  document.getElementById('moonIco').textContent = ico;
+  document.getElementById('moonPhase').textContent = name;
+  document.getElementById('moonIllum').textContent = illum + '%';
+}
+
+function synthCurve(events) {
+  // Jennette's Pier is a subordinate station — NOAA only publishes hi/lo there,
+  // so build the chart curve with cosine interpolation between consecutive extremes.
+  const pts = [];
+  for (let i = 0; i + 1 < events.length; i++) {
+    const a = events[i], b = events[i+1];
+    const span = b.t - a.t;
+    const steps = Math.max(Math.round(span / 600000), 2);  // ~10 min resolution
+    for (let s = 0; s < steps; s++) {
+      const f = s / steps;
+      pts.push({ t: a.t.getTime() + span * f, v: a.v + (b.v - a.v) * (1 - Math.cos(Math.PI * f)) / 2 });
+    }
+  }
+  if (events.length) {
+    const last = events[events.length - 1];
+    pts.push({ t: last.t.getTime(), v: last.v });
+  }
+  return pts;
+}
+
+function renderTides(hilo) {
+  const now = new Date();
+  const events = hilo.map(p => ({ t: parseLocal(p.t), v: parseFloat(p.v), type: p.type }));
+  const curve = synthCurve(events);
+
+  // Next tide + countdown
+  const next = events.find(e => e.t > now);
+  if (next) {
+    const mins = Math.round((next.t - now) / 60000);
+    const hrs = Math.floor(mins / 60), rem = mins % 60;
+    document.getElementById('tideNext').textContent =
+      `${next.type === 'H' ? 'High' : 'Low'} tide at ${fmtTime(next.t)}`;
+    document.getElementById('tideCount').textContent =
+      `in ${hrs ? hrs + 'h ' : ''}${rem}m · ${next.v.toFixed(1)} ft`;
+  }
+
+  // Today's tide pills
+  const today = now.toDateString();
+  const table = document.getElementById('tideTable');
+  table.innerHTML = '';
+  events.filter(e => e.t.toDateString() === today).forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'tide-pill' + (e.t < now ? ' past' : '');
+    div.innerHTML = `
+      <div class="tt">${e.type === 'H' ? '▲ High' : '▼ Low'}</div>
+      <div class="tv">${fmtTime(e.t)}</div>
+      <div class="th">${e.v.toFixed(1)} ft</div>`;
+    table.appendChild(div);
+  });
+
+  tideState = { events, curve };
+  drawTideChart();
+}
+
+let tideState = null;
+
+function drawTideChart() {
+  if (!tideState) return;
+  const { events, curve } = tideState;
+  const now = new Date();
+  const svg = document.getElementById('tideChart');
+  const cw = svg.clientWidth || svg.parentElement.clientWidth || 1000;
+  const narrow = cw < 560;
+
+  // Shorter window on phones so the curve stays readable
+  const back = narrow ? 4 : 6, fwd = narrow ? 12 : 18;
+  const t0 = now.getTime() - back*3600*1000, t1 = now.getTime() + fwd*3600*1000;
+  const pts = curve.filter(p => p.t >= t0 && p.t <= t1);
+  if (!pts.length) return;
+
+  // Draw at the element's real size so text is never stretched
+  const W = cw, H = narrow ? 190 : 240, PADT = 26, PADB = 30;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.style.height = H + 'px';
+  const vmin = Math.min(...pts.map(p => p.v)), vmax = Math.max(...pts.map(p => p.v));
+  const x = t => (t - t0) / (t1 - t0) * W;
+  const y = v => PADT + (1 - (v - vmin) / (vmax - vmin || 1)) * (H - PADT - PADB);
+
+  let path = `M ${x(pts[0].t).toFixed(1)} ${y(pts[0].v).toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) path += ` L ${x(pts[i].t).toFixed(1)} ${y(pts[i].v).toFixed(1)}`;
+  const area = path + ` L ${x(pts[pts.length-1].t).toFixed(1)} ${H} L ${x(pts[0].t).toFixed(1)} ${H} Z`;
+  const clampX = v => Math.max(26, Math.min(W - 26, v));  // keep labels on-canvas
+
+  let inner = `
+    <defs>
+      <linearGradient id="tideFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e7490" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.06"/>
+      </linearGradient>
+    </defs>
+    <path d="${area}" fill="url(#tideFill)"/>
+    <path d="${path}" fill="none" stroke="#0e7490" stroke-width="3" stroke-linecap="round"/>`;
+
+  // Hour labels every 4h — skip ones that would collide with a low-tide marker label
+  const lowMarkerXs = events.filter(e => e.type === 'L' && e.t.getTime() >= t0 && e.t.getTime() <= t1).map(e => x(e.t.getTime()));
+  for (let t = Math.ceil(t0 / (4*3600*1000)) * 4*3600*1000; t <= t1; t += 4*3600*1000) {
+    if (lowMarkerXs.some(mx => Math.abs(mx - x(t)) < (narrow ? 44 : 56))) continue;
+    const lbl = new Date(t).toLocaleTimeString('en-US', {hour:'numeric'}).toLowerCase();
+    inner += `<text x="${x(t).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="${narrow ? 12 : 13}" fill="#64748b" font-family="Outfit,sans-serif">${lbl}</text>`;
+  }
+
+  // High/low markers within window
+  events.filter(e => e.t.getTime() >= t0 && e.t.getTime() <= t1).forEach(e => {
+    const ex = x(e.t.getTime()), ey = y(e.v);
+    const above = e.type === 'H';
+    inner += `
+      <circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="5" fill="${above ? '#0e7490' : '#f59e0b'}" stroke="#fff" stroke-width="2"/>
+      <text x="${clampX(ex).toFixed(1)}" y="${(above ? ey - 12 : ey + 22).toFixed(1)}" text-anchor="middle" font-size="${narrow ? 12 : 13}" font-weight="700" fill="#334155" font-family="Outfit,sans-serif">${fmtTime(e.t)}</text>`;
+  });
+
+  // NOW marker
+  const nx = x(now.getTime());
+  inner += `
+    <line x1="${nx.toFixed(1)}" y1="${PADT-12}" x2="${nx.toFixed(1)}" y2="${H-PADB}" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="${clampX(nx).toFixed(1)}" y="${PADT-15}" text-anchor="middle" font-size="12" font-weight="800" fill="#ef4444" font-family="Outfit,sans-serif">NOW</text>`;
+
+  svg.innerHTML = inner;
+}
+
+async function refresh() {
+  const err = document.getElementById('errBox');
+  try {
+    const [weather, hilo, marine, alerts] = await Promise.all([
+      fetchWeather(),
+      fetchTides('predictions', 'hilo'),
+      fetchMarine().catch(() => null),   // nice-to-haves: never block the core report
+      fetchAlerts().catch(() => null),
+    ]);
+    renderWeather(weather);
+    renderTides(hilo);
+    renderDaily(weather);
+    renderBestWindow(weather);
+    renderOcean(marine);
+    renderAlerts(alerts);
+    renderMoon();
+    err.style.display = 'none';
+    document.getElementById('updated').textContent =
+      'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+  } catch (e) {
+    err.textContent = '⚠️ Trouble reaching ' + (String(e.message).includes('tides') ? 'NOAA tide service' : 'weather service') + ' — will retry in 5 minutes. (' + e.message + ')';
+    err.style.display = 'block';
+  }
+}
+
+refresh();
+setInterval(refresh, 5 * 60 * 1000);
+// Also refresh when tab regains focus (e.g., phone wake)
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+// Redraw tide chart at new size on rotate/resize
+let rsTimer;
+window.addEventListener('resize', () => { clearTimeout(rsTimer); rsTimer = setTimeout(drawTideChart, 150); });
+</script>
+</body>
+</html>
