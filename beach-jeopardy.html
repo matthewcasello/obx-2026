@@ -83,7 +83,9 @@
   .big-btn:disabled{opacity:.35;pointer-events:none;}
 
   /* ---------- CATEGORY PICKER ---------- */
-  #picker{padding:2% 3%;gap:1.2vmin;}
+  #picker{padding:2% 3% 2% 3%;gap:1.2vmin;}
+  #picker .back-btn{position:static;width:6vmin;height:6vmin;font-size:2.6vmin;flex-shrink:0;}
+  #picker .picker-head{align-items:center;}
   .picker-head{display:flex;align-items:center;justify-content:space-between;gap:1.5vmin;}
   .picker-title{font-size:2.8vmin;font-weight:900;color:var(--sand);text-transform:uppercase;letter-spacing:.06em;}
   .picker-sub{font-size:1.8vmin;color:var(--sky);}
@@ -137,6 +139,11 @@
     border-radius:1.2vmin;color:#fff;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;}
   #round2Btn{background:var(--ocean);}
   #finalBtn{background:linear-gradient(135deg,var(--coral),var(--sunset));}
+
+  .back-btn{position:absolute;top:2vmin;left:2vmin;width:7vmin;height:7vmin;border-radius:50%;
+    border:.3vmin solid var(--sky);background:rgba(2,43,69,.7);color:var(--sky);
+    font-size:3.2vmin;font-weight:900;cursor:pointer;z-index:60;line-height:1;}
+  .back-btn:active{transform:scale(.9);}
 
   /* ---------- CLUE MODAL ---------- */
   #clue{position:absolute;inset:0;background:linear-gradient(180deg,var(--abyss) 0%, var(--deep) 100%);
@@ -208,11 +215,13 @@
       <div class="toggle" id="timerToggle" onclick="this.classList.toggle('on')"></div>
     </div>
     <button class="big-btn" onclick="toPicker()">Pick Categories</button>
+    <button class="big-btn" id="resumeBtn" onclick="resumeGame()" style="display:none;background:linear-gradient(135deg,var(--ocean),var(--seafoam))">Resume Last Game</button>
   </div>
 
   <!-- CATEGORY PICKER -->
   <div id="picker" class="screen">
     <div class="picker-head">
+      <button class="back-btn" id="pickerBack" onclick="pickerBack()" title="Back">&larr;</button>
       <div>
         <div class="picker-title" id="pickerTitle">Pick Your Categories</div>
         <div class="picker-sub" id="pickerSub">Choose 5 or 6 from the bank of 30</div>
@@ -238,6 +247,7 @@
 
   <!-- CLUE MODAL -->
   <div id="clue">
+    <button class="back-btn" onclick="cancelClue()" title="Back to board">&larr;</button>
     <div id="timerRing"><span id="timerNum">30</span></div>
     <div id="ddBanner" class="dd-banner" style="display:none">Daily Double!</div>
     <div id="clueCat"></div>
@@ -477,6 +487,51 @@ let current = null;
 let isFinalRound = false;
 let timerOn = false;
 let timerId = null;
+let usedTiles = new Set();
+
+// ----- auto-save: game survives closing the app mid-game -----
+const SAVE_KEY = 'beachJeopardySave';
+function saveState(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      teams, round, boardCats,
+      spent:[...spentCats], used:[...usedTiles], dd:[...dailyDoubles],
+      tilesLeft, timerOn, ts: Date.now()
+    }));
+  }catch(e){}
+}
+function clearSave(){ try{ localStorage.removeItem(SAVE_KEY); }catch(e){} }
+function loadSave(){
+  try{
+    const s = JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(s && s.teams && s.boardCats && s.boardCats.length) return s;
+  }catch(e){}
+  return null;
+}
+function resumeGame(){
+  const s = loadSave();
+  if(!s) return;
+  teams = s.teams; round = s.round; boardCats = s.boardCats;
+  spentCats = new Set(s.spent); usedTiles = new Set(s.used);
+  dailyDoubles = new Set(s.dd); tilesLeft = s.tilesLeft; timerOn = s.timerOn;
+  document.getElementById('roundTag').textContent =
+    round === 1 ? 'Round 1' : 'Round 2: Double Values';
+  buildBoard();
+  usedTiles.forEach(k=>{
+    const t = document.getElementById('tile-'+k.replace('-','-'));
+    const el = document.getElementById('tile-'+k);
+    if(el) el.classList.add('used');
+  });
+  renderScores();
+  if(tilesLeft <= (boardCats.length * 5) - 3){
+    document.getElementById('nextRoundWrap').classList.add('show');
+    document.getElementById('round2Btn').style.display =
+      (round === 1 && BANK.length - spentCats.size >= 5) ? 'block' : 'none';
+  } else {
+    document.getElementById('nextRoundWrap').classList.remove('show');
+  }
+  switchScreen('game');
+}
 
 // ================= SETUP =================
 const namesDiv = document.getElementById('teamNames');
@@ -498,9 +553,12 @@ document.querySelectorAll('.count-btn').forEach(b=>{
   };
 });
 renderNameInputs();
+if(loadSave()){ document.getElementById('resumeBtn').style.display = 'block'; }
 
 function toPicker(){
   if(round === 1){
+    clearSave();
+    usedTiles = new Set();
     teams = [...namesDiv.querySelectorAll('input')].map((inp,i)=>({
       name: inp.value.trim() || ('Team ' + (i+1)),
       score: 0
@@ -545,6 +603,7 @@ function randomPick(){
 }
 
 function startBoard(){
+  usedTiles = new Set();
   boardCats = [...picked];
   boardCats.forEach(i=>spentCats.add(i));
   const n = boardCats.length;
@@ -564,6 +623,7 @@ function startBoard(){
   buildBoard();
   renderScores();
   switchScreen('game');
+  saveState();
 }
 
 function switchScreen(id){
@@ -610,7 +670,7 @@ function renderScores(){
     bar.appendChild(div);
   });
 }
-function bump(i,amt){ teams[i].score += amt; renderScores(); }
+function bump(i,amt){ teams[i].score += amt; renderScores(); saveState(); }
 function esc(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 // ================= TIMER (WebAudio beep, no external files) =================
@@ -735,6 +795,7 @@ function award(i, sign){
   const amt = current.isDD ? current.wager : current.value;
   teams[i].score += sign * amt;
   renderScores();
+  saveState();
   if(sign === 1){ closeClue(); }
 }
 
@@ -746,9 +807,11 @@ function closeClue(){
     const tile = document.getElementById('tile-'+current.c+'-'+current.r);
     if(tile && !tile.classList.contains('used')){
       tile.classList.add('used');
+      usedTiles.add(current.c+'-'+current.r);
       tilesLeft--;
     }
     current = null;
+    saveState();
   }
   // Show round options once the board is mostly played (or immediately if you
   // want to cut the round short after a few tiles).
@@ -759,6 +822,20 @@ function closeClue(){
     document.getElementById('round2Btn').style.display =
       (round === 1 && BANK.length - spentCats.size >= 5) ? 'block' : 'none';
   }
+}
+
+function cancelClue(){
+  // Leave the clue without burning the tile or touching scores
+  hideTimer();
+  if(isFinalRound){ return; }  // no backing out of Final Jeopardy
+  document.getElementById('clue').classList.remove('active');
+  current = null;
+}
+
+function pickerBack(){
+  // Round 1: back to setup. Round 2: back to the (finished) board view.
+  if(round === 1){ switchScreen('setup'); }
+  else { switchScreen('game'); }
 }
 
 // ================= ROUND 2 =================
@@ -804,6 +881,7 @@ function showFinalClue(){
 }
 
 function showWinner(){
+  clearSave();
   hideTimer();
   document.getElementById('clue').classList.remove('active');
   const sorted = [...teams].sort((a,b)=>b.score-a.score);
