@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Beach Jeopardy</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Beach Jeopardy">
+<meta name="theme-color" content="#04395E">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>
+  :root{
+    --abyss:#022B45;      /* darkest ocean */
+    --deep:#04395E;       /* deep ocean */
+    --ocean:#0A6EBD;      /* mid ocean blue */
+    --sky:#7FD4F5;        /* sky blue */
+    --seafoam:#8FE3CF;    /* seafoam green */
+    --sand:#F2D8A7;       /* sand gold */
+    --sandDark:#D9B87C;
+    --coral:#FF6F61;      /* coral accent */
+    --sunset:#FFB347;     /* sunset orange */
+    --pos:#2E9E6B;
+    --neg:#D64545;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    background:#01141F;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    overflow:hidden;
+    user-select:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ===== 16:9 STAGE with buffer for TV bars / overscan ===== */
+  #stage{
+    position:relative;
+    aspect-ratio:16/9;
+    width:min(92vw, calc(92vh * 16 / 9));
+    height:min(92vh, calc(92vw * 9 / 16));
+    background:linear-gradient(180deg, var(--deep) 0%, var(--ocean) 130%);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 0 60px rgba(10,110,189,.45);
+  }
+
+  .screen{display:none;position:absolute;inset:0;flex-direction:column;}
+  .screen.active{display:flex;}
+
+  /* ---------- SETUP ---------- */
+  #setup{align-items:center;justify-content:center;text-align:center;padding:3%;gap:2vmin;}
+  .logo{font-size:7.5vmin;font-weight:900;letter-spacing:.04em;line-height:1;
+    color:var(--sand);text-shadow:0 .5vmin 0 var(--abyss), 0 1vmin 3vmin rgba(0,0,0,.5);}
+  .logo span{color:var(--seafoam);}
+  .tagline{color:var(--sky);font-size:2.1vmin;letter-spacing:.3em;text-transform:uppercase;}
+  .wave{width:50%;height:1.3vmin;border-radius:99px;
+    background:linear-gradient(90deg,var(--seafoam),var(--sky),var(--sand),var(--coral));}
+  .setup-row{display:flex;gap:1.5vmin;align-items:center;justify-content:center;flex-wrap:wrap;}
+  .setup-label{font-size:2vmin;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;}
+  .count-btn{width:6.2vmin;height:6.2vmin;border-radius:1.4vmin;border:.3vmin solid var(--sky);
+    background:var(--abyss);color:#fff;font-size:2.8vmin;font-weight:800;cursor:pointer;}
+  .count-btn.sel{background:var(--coral);border-color:var(--coral);}
+  #teamNames{display:flex;flex-direction:row;gap:1.2vmin;flex-wrap:wrap;justify-content:center;max-width:90%;}
+  #teamNames input{padding:1.3vmin 1.5vmin;font-size:2.1vmin;border-radius:1.2vmin;
+    border:.3vmin solid var(--sky);background:var(--abyss);color:#fff;text-align:center;
+    font-weight:700;width:21vmin;}
+  #teamNames input:focus{outline:none;border-color:var(--seafoam);}
+  .toggle-row{display:flex;gap:1.2vmin;align-items:center;}
+  .toggle{width:8vmin;height:4.2vmin;border-radius:99px;background:var(--abyss);
+    border:.3vmin solid var(--sky);position:relative;cursor:pointer;transition:background .2s;}
+  .toggle::after{content:'';position:absolute;top:.35vmin;left:.4vmin;width:3vmin;height:3vmin;
+    border-radius:50%;background:var(--sky);transition:transform .2s;}
+  .toggle.on{background:var(--seafoam);border-color:var(--seafoam);}
+  .toggle.on::after{transform:translateX(3.6vmin);background:var(--abyss);}
+  .big-btn{padding:1.9vmin 5.5vmin;font-size:2.5vmin;font-weight:900;letter-spacing:.06em;border:none;
+    border-radius:1.8vmin;background:linear-gradient(135deg,var(--coral),var(--sunset));color:#fff;
+    cursor:pointer;box-shadow:0 .8vmin 2.5vmin rgba(255,111,97,.4);text-transform:uppercase;}
+  .big-btn:active{transform:scale(.96);}
+  .big-btn:disabled{opacity:.35;pointer-events:none;}
+
+  /* ---------- CATEGORY PICKER ---------- */
+  #picker{padding:2% 3%;gap:1.2vmin;}
+  .picker-head{display:flex;align-items:center;justify-content:space-between;gap:1.5vmin;}
+  .picker-title{font-size:2.8vmin;font-weight:900;color:var(--sand);text-transform:uppercase;letter-spacing:.06em;}
+  .picker-sub{font-size:1.8vmin;color:var(--sky);}
+  .picker-actions{display:flex;gap:1vmin;}
+  .small-btn{padding:1.1vmin 2.2vmin;font-size:1.8vmin;font-weight:800;border:none;border-radius:1.1vmin;
+    cursor:pointer;color:#fff;text-transform:uppercase;letter-spacing:.04em;background:var(--ocean);}
+  .small-btn.go{background:linear-gradient(135deg,var(--coral),var(--sunset));}
+  .small-btn:disabled{opacity:.35;pointer-events:none;}
+  #catGrid{flex:1;display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:1fr;gap:.8vmin;min-height:0;overflow:hidden;}
+  .pick{border:none;border-radius:1vmin;background:var(--abyss);color:var(--sky);
+    font-size:1.75vmin;font-weight:800;text-transform:uppercase;cursor:pointer;padding:.5vmin;
+    line-height:1.15;letter-spacing:.02em;border:.25vmin solid transparent;}
+  .pick.sel{background:var(--ocean);color:#fff;border-color:var(--seafoam);}
+  .pick.spent{opacity:.25;pointer-events:none;text-decoration:line-through;}
+
+  /* ---------- GAME LAYOUT ---------- */
+  #game{padding:1%;}
+  #roundTag{text-align:center;font-size:1.7vmin;color:var(--sand);text-transform:uppercase;
+    letter-spacing:.25em;font-weight:800;padding-bottom:.5vmin;}
+  #board{flex:1;display:grid;grid-template-rows:minmax(0,1.1fr) repeat(5,minmax(0,1fr));
+    gap:.6vmin;min-height:0;}
+  .cat{background:var(--abyss);border-radius:.9vmin;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:.5vmin .4vmin;font-weight:900;text-transform:uppercase;
+    font-size:1.9vmin;line-height:1.15;color:#fff;
+    border-bottom:.5vmin solid var(--coral);letter-spacing:.02em;}
+  .tile{background:linear-gradient(160deg,var(--ocean),var(--deep));border-radius:.9vmin;border:none;
+    color:var(--sand);font-weight:900;font-size:4vmin;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    text-shadow:0 .4vmin .8vmin rgba(0,0,0,.5);transition:transform .1s;}
+  .tile:active{transform:scale(.95);}
+  .tile.used{background:rgba(1,20,31,.55);color:transparent;pointer-events:none;text-shadow:none;}
+
+  /* ---------- SCOREBAR ---------- */
+  #scorebar{display:flex;gap:.6vmin;padding-top:.6vmin;}
+  .team{flex:1;background:var(--abyss);border-radius:1vmin;padding:.7vmin .4vmin;text-align:center;
+    border-top:.5vmin solid var(--seafoam);}
+  .team.t2{border-top-color:var(--sunset);}
+  .team.t3{border-top-color:var(--coral);}
+  .team.t4{border-top-color:var(--sky);}
+  .team .tname{font-size:1.7vmin;font-weight:700;color:var(--sky);
+    text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .team .tscore{font-size:3vmin;font-weight:900;color:var(--sand);}
+  .team .tscore.negative{color:var(--neg);}
+  .adj{display:flex;justify-content:center;gap:1vmin;margin-top:.2vmin;}
+  .adj button{width:4vmin;height:3vmin;border-radius:.7vmin;border:none;background:var(--deep);
+    color:var(--sky);font-size:2vmin;font-weight:900;cursor:pointer;}
+
+  #nextRoundWrap{padding-top:.6vmin;display:none;gap:.6vmin;}
+  #nextRoundWrap.show{display:flex;}
+  #nextRoundWrap button{flex:1;padding:1.3vmin;font-size:2vmin;font-weight:900;border:none;
+    border-radius:1.2vmin;color:#fff;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;}
+  #round2Btn{background:var(--ocean);}
+  #finalBtn{background:linear-gradient(135deg,var(--coral),var(--sunset));}
+
+  /* ---------- CLUE MODAL ---------- */
+  #clue{position:absolute;inset:0;background:linear-gradient(180deg,var(--abyss) 0%, var(--deep) 100%);
+    display:none;flex-direction:column;align-items:center;justify-content:center;
+    padding:5%;text-align:center;gap:2.4vmin;z-index:50;}
+  #clue.active{display:flex;}
+  #timerRing{position:absolute;top:2.5vmin;right:2.5vmin;width:9vmin;height:9vmin;display:none;
+    align-items:center;justify-content:center;border-radius:50%;
+    font-size:3.2vmin;font-weight:900;color:var(--sand);
+    background:conic-gradient(var(--seafoam) var(--pct,100%), rgba(255,255,255,.12) 0);}
+  #timerRing.on{display:flex;}
+  #timerRing.warn{background:conic-gradient(var(--coral) var(--pct,100%), rgba(255,255,255,.12) 0);color:#fff;}
+  #timerRing span{background:var(--abyss);width:7vmin;height:7vmin;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;}
+  #clueValue{font-size:3.4vmin;font-weight:900;color:var(--sand);letter-spacing:.05em;}
+  #clueCat{font-size:2.1vmin;font-weight:700;color:var(--seafoam);text-transform:uppercase;letter-spacing:.25em;}
+  #clueText{font-size:4.4vmin;font-weight:800;line-height:1.3;max-width:92%;
+    text-shadow:0 .4vmin 1.2vmin rgba(0,0,0,.5);}
+  #answerText{font-size:3.8vmin;font-weight:900;color:var(--seafoam);display:none;line-height:1.3;max-width:92%;}
+  #answerText.shown{display:block;}
+  .dd-banner{font-size:6.5vmin;font-weight:900;color:var(--sunset);
+    text-transform:uppercase;letter-spacing:.08em;animation:pulse 1s infinite alternate;
+    text-shadow:0 0 4vmin rgba(255,179,71,.7);}
+  @keyframes pulse{from{transform:scale(1);}to{transform:scale(1.06);}}
+  #wagerBox{display:flex;gap:1.4vmin;align-items:center;flex-wrap:wrap;justify-content:center;}
+  #wagerBox input{width:20vmin;padding:1.5vmin;font-size:2.8vmin;font-weight:800;text-align:center;
+    border-radius:1.2vmin;border:.3vmin solid var(--sunset);background:var(--abyss);color:#fff;}
+  .modal-btns{display:flex;gap:1.6vmin;flex-wrap:wrap;justify-content:center;}
+  .mbtn{padding:1.7vmin 3.4vmin;font-size:2.3vmin;font-weight:800;border:none;border-radius:1.4vmin;
+    cursor:pointer;color:#fff;text-transform:uppercase;letter-spacing:.04em;}
+  .mbtn:active{transform:scale(.95);}
+  .mbtn.reveal{background:var(--ocean);}
+  .mbtn.nobody{background:transparent;border:.3vmin solid var(--sky);color:var(--sky);}
+  .award-grid{display:flex;gap:1.4vmin;flex-wrap:wrap;justify-content:center;}
+  .award-team{display:flex;flex-direction:column;gap:.6vmin;align-items:center;}
+  .award-label{font-size:1.8vmin;font-weight:700;color:var(--sky);text-transform:uppercase;
+    max-width:16vmin;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .award-pair{display:flex;gap:.8vmin;}
+  .mbtn.correct{background:var(--pos);padding:1.5vmin 2.5vmin;}
+  .mbtn.wrong{background:var(--neg);padding:1.5vmin 2.5vmin;}
+
+  /* ---------- WINNER ---------- */
+  #winner{position:absolute;inset:0;background:linear-gradient(180deg,var(--abyss),var(--ocean));
+    display:none;flex-direction:column;align-items:center;justify-content:center;gap:2.4vmin;z-index:60;
+    text-align:center;padding:5%;}
+  #winner.active{display:flex;}
+  #winnerName{font-size:8.5vmin;font-weight:900;color:var(--sand);}
+  #winnerSub{font-size:2.4vmin;color:var(--seafoam);text-transform:uppercase;letter-spacing:.25em;}
+  #finalScores{font-size:2.4vmin;color:var(--sky);line-height:1.6;}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- SETUP -->
+  <div id="setup" class="screen active">
+    <div class="logo">BEACH <span>JEOPARDY</span></div>
+    <div class="tagline">Game Night Edition</div>
+    <div class="wave"></div>
+    <div class="setup-row">
+      <span class="setup-label">Teams</span>
+      <button class="count-btn" data-n="2">2</button>
+      <button class="count-btn sel" data-n="3">3</button>
+      <button class="count-btn" data-n="4">4</button>
+    </div>
+    <div id="teamNames"></div>
+    <div class="toggle-row">
+      <span class="setup-label">30-Second Timer</span>
+      <div class="toggle" id="timerToggle" onclick="this.classList.toggle('on')"></div>
+    </div>
+    <button class="big-btn" onclick="toPicker()">Pick Categories</button>
+  </div>
+
+  <!-- CATEGORY PICKER -->
+  <div id="picker" class="screen">
+    <div class="picker-head">
+      <div>
+        <div class="picker-title" id="pickerTitle">Pick Your Categories</div>
+        <div class="picker-sub" id="pickerSub">Choose 5 or 6 from the bank of 30</div>
+      </div>
+      <div class="picker-actions">
+        <button class="small-btn" onclick="randomPick()">Surprise Me</button>
+        <button class="small-btn go" id="startBoardBtn" onclick="startBoard()" disabled>Start (0)</button>
+      </div>
+    </div>
+    <div id="catGrid"></div>
+  </div>
+
+  <!-- GAME -->
+  <div id="game" class="screen">
+    <div id="roundTag"></div>
+    <div id="board"></div>
+    <div id="nextRoundWrap">
+      <button id="round2Btn" onclick="startRound2()">Round 2: Double Values</button>
+      <button id="finalBtn" onclick="startFinal()">Final Jeopardy</button>
+    </div>
+    <div id="scorebar"></div>
+  </div>
+
+  <!-- CLUE MODAL -->
+  <div id="clue">
+    <div id="timerRing"><span id="timerNum">30</span></div>
+    <div id="ddBanner" class="dd-banner" style="display:none">Daily Double!</div>
+    <div id="clueCat"></div>
+    <div id="clueValue"></div>
+    <div id="wagerBox" style="display:none">
+      <input id="wagerInput" type="number" inputmode="numeric" placeholder="Wager">
+      <button class="mbtn reveal" onclick="lockWager()">Lock It In</button>
+    </div>
+    <div id="clueText" style="display:none"></div>
+    <div id="answerText"></div>
+    <div class="modal-btns" id="revealBtns" style="display:none">
+      <button class="mbtn reveal" onclick="revealAnswer()">Reveal Answer</button>
+    </div>
+    <div id="awardArea" style="display:none">
+      <div class="award-grid" id="awardGrid"></div>
+      <div style="height:1.5vmin"></div>
+      <button class="mbtn nobody" onclick="closeClue()">No One Got It</button>
+    </div>
+  </div>
+
+  <!-- WINNER -->
+  <div id="winner">
+    <div id="winnerSub">And the champion is</div>
+    <div id="winnerName"></div>
+    <div class="wave"></div>
+    <div id="finalScores"></div>
+    <button class="big-btn" onclick="location.reload()">Play Again</button>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// CATEGORY BANK: 30 categories x 5 clues (easy -> hard)
+// Format: [clue shown on screen, correct response]
+// ============================================================
+const BANK = [
+{cat:"Under the Sea",clues:[
+["This eight-armed sea creature squirts ink and can squeeze through tiny gaps.","What is an octopus?"],
+["Male, not female, members of this upright-swimming fish carry the babies.","What is a seahorse?"],
+["The world's largest fish, this gentle giant eats mostly plankton.","What is a whale shark?"],
+["These colorful underwater structures are colonies of tiny living animals.","What are coral reefs?"],
+["Nearly 7 miles down in the Pacific, this is the deepest known point in the ocean.","What is the Mariana Trench?"]]},
+{cat:"Gone Fishin'",clues:[
+["Casting from the sand into the waves is this style of fishing.","What is surf fishing?"],
+["This red-and-white float dips underwater to tell you a fish is biting.","What is a bobber?"],
+["Squid, shrimp, and sand fleas are all common types of this on a hook.","What is bait?"],
+["This spinning device on the rod holds and retrieves your line.","What is a reel?"],
+["Pyramid and 'sputnik' styles of this help your rig hold bottom in rough surf.","What is a sinker (surf weight)?"]]},
+{cat:"Beach Science",clues:[
+["The gravitational pull of this celestial body is the main driver of ocean tides.","What is the moon?"],
+["Beach sand is mostly tiny grains of this common mineral.","What is quartz?"],
+["Swim parallel to shore to escape this dangerous narrow current.","What is a rip current?"],
+["SPF on a sunscreen bottle stands for this.","What is Sun Protection Factor?"],
+["Waves get taller and closer together as they hit shallow water in this process, called 'shoaling' or this common term for a breaking wave zone.","What is the surf (break) zone?"]]},
+{cat:"Beach Eats",clues:[
+["Boiled and served with drawn butter, this crustacean turns bright red when cooked.","What is a lobster?"],
+["Steamed or fried, these hinged shellfish give their name to a famous chowder.","What are clams?"],
+["Old Bay seasoning is most famously sprinkled on this Chesapeake specialty.","What are blue crabs?"],
+["This raw bar favorite is slurped from a half shell, sometimes with a pearl surprise.","What is an oyster?"],
+["New England and Manhattan versions of this soup differ on cream versus tomato.","What is clam chowder?"]]},
+{cat:"Surf Culture",clues:[
+["Hawaiian legend Duke Kahanamoku is called the father of this sport.","What is surfing?"],
+["'Hang ten' means putting this many toes over the nose of the board.","What is ten?"],
+["This wax goes on top of a surfboard, not the bottom, for grip.","What is surf wax?"],
+["A 'wipeout' happens when a surfer does this.","What is falling off the board?"],
+["This word for a perfect hollow wave is also something you drive through under a mountain.","What is a tunnel (barrel/tube)?"]]},
+{cat:"Shore Finds",clues:[
+["Hold this spiral shell to your ear and people say you can hear the ocean.","What is a conch (seashell)?"],
+["These five-armed sea creatures can regrow a lost limb.","What are starfish?"],
+["This glass, tumbled smooth by waves for years, is a beachcomber's treasure.","What is sea glass?"],
+["Flat and coin-shaped, this sea urchin relative is a prized beach find.","What is a sand dollar?"],
+["This fossilized tree resin sometimes washes ashore and can hold ancient insects.","What is amber?"]]},
+{cat:"Lighthouses",clues:[
+["Lighthouses were built to warn ships away from these underwater dangers.","What are rocks, reefs, and shoals?"],
+["At 198 feet, this spiral-striped North Carolina lighthouse is America's tallest brick one.","What is the Cape Hatteras Lighthouse?"],
+["The person who lived at and tended a lighthouse held this job title.","What is a lighthouse keeper?"],
+["This special rotating glass lens, named for a French physicist, focused lighthouse beams for miles.","What is a Fresnel lens?"],
+["One of the Seven Wonders of the Ancient World was a great lighthouse in this Egyptian city.","What is Alexandria?"]]},
+{cat:"Pirates & Shipwrecks",clues:[
+["Pirates supposedly buried this and marked the spot with an X.","What is treasure?"],
+["This fearsome pirate, Edward Teach, was killed off North Carolina in 1718.","Who is Blackbeard?"],
+["This 'unsinkable' ship struck an iceberg on its maiden voyage in 1912.","What is the Titanic?"],
+["The skull and crossbones pirate flag goes by this jolly name.","What is the Jolly Roger?"],
+["So many ships sank off Cape Hatteras that the area earned this grim nickname.","What is the Graveyard of the Atlantic?"]]},
+{cat:"Ocean Movies",clues:[
+["This 1975 Spielberg thriller made everyone afraid to go back in the water.","What is Jaws?"],
+["A forgetful blue tang named Dory helps find this Pixar clownfish.","Who is Nemo?"],
+["This animated mermaid trades her voice for legs.","Who is Ariel (The Little Mermaid)?"],
+["Tom Hanks talks to a volleyball named Wilson in this castaway film.","What is Cast Away?"],
+["This 2016 Disney film follows a Polynesian girl chosen by the ocean itself.","What is Moana?"]]},
+{cat:"Summer Songs",clues:[
+["The Beach Boys wished they all could be these 'girls' from a certain state.","What are California girls?"],
+["This 1978 movie musical features 'Summer Nights' with Danny and Sandy.","What is Grease?"],
+["Jimmy Buffett spent his career wasting away again in this fictional drink town.","What is Margaritaville?"],
+["'Under the Boardwalk' was a 1964 hit for this 'drifting' group.","Who are The Drifters?"],
+["Katrina and the Waves were 'Walking on' this in a one-hit summer anthem.","What is sunshine?"]]},
+{cat:"Beach Games",clues:[
+["Toss bean bags at an angled board with a hole in this tailgate classic.","What is cornhole?"],
+["This net-and-trampoline game has teams spiking a small yellow ball.","What is Spikeball?"],
+["Olympic beach version of this net sport is played 2-on-2 in the sand.","What is beach volleyball?"],
+["These plastic discs are thrown to dogs and friends alike on the beach.","What are Frisbees?"],
+["In this paddle game from Israel, popular on beaches worldwide, the goal is to NOT let the ball drop.","What is Matkot (paddleball)?"]]},
+{cat:"Sharks!",clues:[
+["This is the famous giant of shark movies, and the real ocean's top predator shark.","What is the great white?"],
+["Sharks skeletons are made of this flexible material, not bone.","What is cartilage?"],
+["This oddly-shaped shark's head looks like a carpentry tool.","What is a hammerhead?"],
+["Sharks can detect a tiny amount of this in the water from far away.","What is blood?"],
+["This Discovery Channel event has celebrated sharks every summer since 1988.","What is Shark Week?"]]},
+{cat:"Boats & Sailing",clues:[
+["The left side of a boat is called port; the right side is called this.","What is starboard?"],
+["Drop this heavy metal object to keep your boat from drifting.","What is an anchor?"],
+["The speed of a boat is measured in these, not miles per hour.","What are knots?"],
+["This tiny one- or two-person sailboat shares its name with a swift bird.","What is a Sunfish (or Laser... accept small dinghy names)?"],
+["The front of a boat is the bow; the back is called this.","What is the stern?"]]},
+{cat:"Island Nations",clues:[
+["This U.S. state is made up entirely of islands.","What is Hawaii?"],
+["This island nation south of Florida is famous for cigars and classic cars.","What is Cuba?"],
+["Reggae music and Bob Marley come from this Caribbean island.","What is Jamaica?"],
+["This Indian Ocean island nation is the lowest-lying country on Earth.","What is the Maldives?"],
+["Comprising over 17,000 islands, this is the world's largest archipelago nation.","What is Indonesia?"]]},
+{cat:"Famous Beaches",clues:[
+["This Hawaiian beach in Honolulu is one of the most famous in the world.","What is Waikiki?"],
+["This Rio de Janeiro beach shares its name with a Barry Manilow song.","What is Copacabana?"],
+["Lifeguards patrolled this famous L.A.-area beach on the TV show Baywatch, filmed largely in this seaside city known for its pier.","What is Santa Monica (Malibu accepted)?"],
+["Spring breakers flock to this Florida panhandle 'city beach' with an emerald coast.","What is Panama City Beach?"],
+["This Sydney beach, famous for surfing, has a name meaning 'water breaking over rocks.'","What is Bondi Beach?"]]},
+{cat:"Tropical Treats",clues:[
+["This blended pineapple-and-coconut cocktail asks if you like getting caught in the rain.","What is a piña colada?"],
+["This spiky tropical fruit tops upside-down cakes and Hawaiian pizza.","What is a pineapple?"],
+["Shaved ice drenched in syrup is called this in Hawaii.","What is shave ice?"],
+["This green citrus fruit puts the twist in a margarita and a key pie.","What is a lime?"],
+["This Brazilian cocktail of cachaça, sugar, and lime is the national drink.","What is a caipirinha?"]]},
+{cat:"Sea Birds",clues:[
+["This beach bird will absolutely steal your french fries.","What is a seagull?"],
+["This bird's huge throat pouch scoops up fish; a famous limerick says its beak holds more than its belly can.","What is a pelican?"],
+["These tuxedo-colored birds swim brilliantly but cannot fly.","What are penguins?"],
+["This long-winged wanderer can glide for years at sea and is bad luck to sailors.","What is an albatross?"],
+["These small shorebirds chase receding waves on quick little legs, like wind-up toys.","What are sandpipers (sanderlings)?"]]},
+{cat:"Tides & Weather",clues:[
+["When the ocean pulls back to its lowest point, it's called this tide.","What is low tide?"],
+["This scale, named for a wind admiral, rates wind force from 0 to 12.","What is the Beaufort scale?"],
+["Hurricanes in the Pacific Ocean are called this.","What are typhoons?"],
+["The extra-high tides during a full or new moon are called this, though they happen year-round.","What are spring tides?"],
+["This colorful arc appears when sunlight passes through sea spray or rain.","What is a rainbow?"]]},
+{cat:"Beach TV",clues:[
+["This Netflix drama about Pogues hunting treasure is named for a North Carolina region.","What is Outer Banks?"],
+["Slow-motion lifeguard runs made this 90s show a global phenomenon.","What is Baywatch?"],
+["This reality competition strands castaways on an island to outwit, outplay, outlast.","What is Survivor?"],
+["SpongeBob SquarePants lives in a pineapple in this underwater city.","What is Bikini Bottom?"],
+["Gilligan, the Skipper, and five castaways were stranded on this sitcom's island for three seasons.","What is Gilligan's Island?"]]},
+{cat:"Crabs & Critters",clues:[
+["These pale crabs scurry across beaches at night, named for their spooky look.","What are ghost crabs?"],
+["This crab has no shell of its own, so it borrows abandoned ones.","What is a hermit crab?"],
+["Beachgoers dig for these burrowing 'fleas' that make great fishing bait.","What are sand fleas (mole crabs)?"],
+["This ancient armored animal with blue blood is more related to spiders than crabs.","What is a horseshoe crab?"],
+["One claw of this crab is dramatically bigger than the other, used to wave at mates.","What is a fiddler crab?"]]},
+{cat:"Water Sports",clues:[
+["Standing on a board with a long paddle is this sport, SUP for short.","What is stand-up paddleboarding?"],
+["Strap on a mask and this tube to breathe while floating face-down.","What is a snorkel?"],
+["A boat tows you on this inflatable ride that always ends in a wipeout.","What is a tube (tubing)?"],
+["This sport uses a large kite to drag a rider across the water on a board.","What is kiteboarding (kitesurfing)?"],
+["SCUBA is an acronym; the 'SC' stands for these two words.","What is Self-Contained?"]]},
+{cat:"Coastal USA",clues:[
+["This 'garden state' boasts boardwalks in Wildwood and Ocean City.","What is New Jersey?"],
+["Key West is the southernmost point of this state.","What is Florida?"],
+["This Massachusetts cape hooks into the Atlantic like a flexed arm.","What is Cape Cod?"],
+["The Pacific Coast Highway, Route 1, hugs the coast of this state.","What is California?"],
+["This Texas island city was nearly destroyed by a 1900 hurricane, still the deadliest US natural disaster.","What is Galveston?"]]},
+{cat:"Whales & Dolphins",clues:[
+["This largest animal ever to live on Earth swims the oceans today.","What is the blue whale?"],
+["Flipper was this kind of famously smart marine mammal.","What is a (bottlenose) dolphin?"],
+["This black-and-white 'killer whale' is actually the largest dolphin.","What is an orca?"],
+["Male members of this Arctic whale species grow a single spiral tusk.","What is a narwhal?"],
+["Humpback whales are famous for doing this dramatic leap out of the water.","What is breaching?"]]},
+{cat:"Sandcastle Lab",clues:[
+["The best sandcastle sand is this, not too dry and not too soupy.","What is damp (wet) sand?"],
+["This bucket-shaped tool gives sandcastle towers their classic look.","What is a pail (bucket)?"],
+["Dig this water-filled ditch around your castle to protect it.","What is a moat?"],
+["Drizzling super-wet sand through your fingers builds these gloopy spires.","What are drip castles?"],
+["Sand sticks together because of this force created by water between grains, the same reason wet hair clumps.","What is surface tension (cohesion)?"]]},
+{cat:"Beach Reads",clues:[
+["Peter Benchley wrote this shark novel before it became a blockbuster film.","What is Jaws?"],
+["Robinson Crusoe was shipwrecked and stranded on one of these.","What is a desert island?"],
+["This Hemingway novella features Santiago battling a giant marlin.","What is The Old Man and the Sea?"],
+["In this classic, boys stranded on an island descend into savagery around a conch shell.","What is Lord of the Flies?"],
+["Jules Verne's Captain Nemo pilots the Nautilus in this many 'leagues under the sea.'","What is 20,000?"]]},
+{cat:"Salty Slang",clues:[
+["A brand-new sailor might be called a landlubber or this green word.","What is a greenhorn?"],
+["'Ahoy' is a sailor's way of saying this.","What is hello?"],
+["If you feel queasy on a boat, you've got this kind of sickness.","What is seasickness?"],
+["'Batten down the hatches' means to do this before a storm.","What is secure everything (prepare)?"],
+["Knowing 'the ropes' comes from sailing; a rope in use on a ship is properly called this.","What is a line?"]]},
+{cat:"Kids' Corner",clues:[
+["You wear these on your feet so hot sand doesn't burn you; they flip and they flop.","What are flip flops?"],
+["Build a sandcastle, then watch this rising water knock it down.","What is the tide (waves)?"],
+["This cream keeps you from turning red as a lobster.","What is sunscreen?"],
+["A five-armed animal you find in tide pools rhymes with 'car dish.'","What is a starfish?"],
+["This striped item shades your whole family and sometimes blows away down the beach.","What is a beach umbrella?"]]},
+{cat:"OBX Originals",clues:[
+["These two brothers made the first powered flight at Kill Devil Hills in 1903.","Who are the Wright Brothers?"],
+["This 'ridge' in Nags Head is the tallest living sand dune on the East Coast.","What is Jockey's Ridge?"],
+["In 1587 this English colony on Roanoke Island vanished, leaving the word CROATOAN.","What is the Lost Colony?"],
+["Wild horses descended from Spanish mustangs roam the beaches of this northern OBX town.","What is Corolla?"],
+["This scenic highway is the only road running the length of Hatteras Island.","What is NC Highway 12?"]]},
+{cat:"Deep Sea Mysteries",clues:[
+["This legendary sunken city was described by the Greek philosopher Plato.","What is Atlantis?"],
+["Ships and planes supposedly vanish in this triangular patch of the Atlantic.","What is the Bermuda Triangle?"],
+["This giant deep-sea cephalopod inspired the kraken legend.","What is the giant squid?"],
+["This glowing trick, used by anglerfish and jellyfish, lets deep sea creatures make their own light.","What is bioluminescence?"],
+["Discovered in 1977, these deep-sea chimneys spew superheated water and host life without sunlight.","What are hydrothermal vents?"]]},
+{cat:"Sunset Sessions",clues:[
+["The sun sets in this compass direction.","What is west?"],
+["This is the term for the brief flash of green light sometimes seen just as the sun dips below the ocean.","What is the green flash?"],
+["The pink-orange band opposite the sunset, above Earth's shadow, is nicknamed the belt of this goddess.","What is Venus?"],
+["Red skies at night are this person's delight, per the old rhyme.","Who is a sailor?"],
+["Sunsets look red because air molecules scatter away this color of light first.","What is blue?"]]}
+];
+
+const VALUES = [200, 400, 600, 800, 1000];
+const FINAL = {
+  cat: "World Beaches",
+  clue: "Home to more than 10,000 beaches, you could visit one on this island continent every day for over 27 years.",
+  answer: "What is Australia?"
+};
+
+// ================= STATE =================
+let teams = [];
+let numTeams = 3;
+let round = 1;               // 1 = single, 2 = double values
+let boardCats = [];          // indices into BANK for current board
+let spentCats = new Set();   // categories already played this game
+let picked = new Set();      // current picker selection
+let tilesLeft = 0;
+let dailyDoubles = new Set();
+let current = null;
+let isFinalRound = false;
+let timerOn = false;
+let timerId = null;
+
+// ================= SETUP =================
+const namesDiv = document.getElementById('teamNames');
+function renderNameInputs(){
+  namesDiv.innerHTML = '';
+  for(let i=0;i<numTeams;i++){
+    const inp = document.createElement('input');
+    inp.placeholder = 'Team ' + (i+1);
+    inp.maxLength = 14;
+    namesDiv.appendChild(inp);
+  }
+}
+document.querySelectorAll('.count-btn').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('.count-btn').forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel');
+    numTeams = +b.dataset.n;
+    renderNameInputs();
+  };
+});
+renderNameInputs();
+
+function toPicker(){
+  if(round === 1){
+    teams = [...namesDiv.querySelectorAll('input')].map((inp,i)=>({
+      name: inp.value.trim() || ('Team ' + (i+1)),
+      score: 0
+    }));
+    timerOn = document.getElementById('timerToggle').classList.contains('on');
+  }
+  picked = new Set();
+  document.getElementById('pickerTitle').textContent =
+    round === 1 ? 'Pick Your Categories' : 'Round 2: Pick Again';
+  document.getElementById('pickerSub').textContent =
+    'Choose 5 or 6 from the bank of ' + (BANK.length - spentCats.size) + ' remaining';
+  renderPicker();
+  switchScreen('picker');
+}
+
+function renderPicker(){
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  BANK.forEach((b,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'pick' + (spentCats.has(i) ? ' spent' : '') + (picked.has(i) ? ' sel' : '');
+    btn.textContent = b.cat;
+    btn.onclick = ()=>{
+      if(picked.has(i)) picked.delete(i);
+      else if(picked.size < 6) picked.add(i);
+      renderPicker();
+    };
+    grid.appendChild(btn);
+  });
+  const go = document.getElementById('startBoardBtn');
+  go.textContent = 'Start (' + picked.size + ')';
+  go.disabled = !(picked.size === 5 || picked.size === 6);
+}
+
+function randomPick(){
+  picked = new Set();
+  const avail = BANK.map((_,i)=>i).filter(i=>!spentCats.has(i));
+  while(picked.size < Math.min(6, avail.length)){
+    picked.add(avail[Math.floor(Math.random()*avail.length)]);
+  }
+  renderPicker();
+}
+
+function startBoard(){
+  boardCats = [...picked];
+  boardCats.forEach(i=>spentCats.add(i));
+  const n = boardCats.length;
+  tilesLeft = n * 5;
+  // Auto-place daily doubles: 1 in round 1, 2 in round 2 (like the real show),
+  // never in the top row.
+  dailyDoubles = new Set();
+  const ddCount = round === 1 ? 1 : 2;
+  while(dailyDoubles.size < ddCount){
+    const c = Math.floor(Math.random()*n);
+    const r = 1 + Math.floor(Math.random()*4);
+    dailyDoubles.add(c + '-' + r);
+  }
+  document.getElementById('roundTag').textContent =
+    round === 1 ? 'Round 1' : 'Round 2: Double Values';
+  document.getElementById('nextRoundWrap').classList.remove('show');
+  buildBoard();
+  renderScores();
+  switchScreen('game');
+}
+
+function switchScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ================= BOARD =================
+function tileValue(r){ return VALUES[r] * (round === 2 ? 2 : 1); }
+
+function buildBoard(){
+  const board = document.getElementById('board');
+  const n = boardCats.length;
+  board.style.gridTemplateColumns = 'repeat(' + n + ',1fr)';
+  board.innerHTML = '';
+  boardCats.forEach(ci=>{
+    const el = document.createElement('div');
+    el.className = 'cat';
+    el.textContent = BANK[ci].cat;
+    board.appendChild(el);
+  });
+  for(let r=0;r<5;r++){
+    for(let c=0;c<n;c++){
+      const t = document.createElement('button');
+      t.className = 'tile';
+      t.id = 'tile-'+c+'-'+r;
+      t.textContent = '$' + tileValue(r);
+      t.onclick = ()=>openClue(c,r);
+      board.appendChild(t);
+    }
+  }
+}
+
+function renderScores(){
+  const bar = document.getElementById('scorebar');
+  bar.innerHTML = '';
+  teams.forEach((t,i)=>{
+    const div = document.createElement('div');
+    div.className = 'team t'+(i+1);
+    div.innerHTML =
+      '<div class="tname">'+esc(t.name)+'</div>' +
+      '<div class="tscore'+(t.score<0?' negative':'')+'">$'+t.score.toLocaleString()+'</div>' +
+      '<div class="adj"><button onclick="bump('+i+',-100)">&minus;</button><button onclick="bump('+i+',100)">+</button></div>';
+    bar.appendChild(div);
+  });
+}
+function bump(i,amt){ teams[i].score += amt; renderScores(); }
+function esc(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+// ================= TIMER (WebAudio beep, no external files) =================
+function beep(freq, dur, when){
+  try{
+    if(!window._actx) window._actx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = window._actx;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = freq; o.type = 'sine';
+    g.gain.setValueAtTime(.25, ctx.currentTime + when);
+    g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + when + dur);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + when); o.stop(ctx.currentTime + when + dur);
+  }catch(e){}
+}
+function timesUp(){ beep(880,.18,0); beep(660,.18,.2); beep(440,.4,.4); }
+
+function startTimer(){
+  if(!timerOn) return;
+  stopTimer();
+  const ring = document.getElementById('timerRing');
+  const num = document.getElementById('timerNum');
+  let t = 30;
+  ring.classList.add('on');
+  ring.classList.remove('warn');
+  num.textContent = t;
+  ring.style.setProperty('--pct','100%');
+  timerId = setInterval(()=>{
+    t--;
+    if(t < 0){ stopTimer(); timesUp(); return; }
+    num.textContent = t;
+    ring.style.setProperty('--pct', (t/30*100) + '%');
+    if(t <= 5){ ring.classList.add('warn'); beep(880,.08,0); }
+  }, 1000);
+}
+function stopTimer(){
+  if(timerId){ clearInterval(timerId); timerId = null; }
+}
+function hideTimer(){
+  stopTimer();
+  document.getElementById('timerRing').classList.remove('on');
+}
+
+// ================= CLUE FLOW =================
+function openClue(c,r){
+  const key = c+'-'+r;
+  const isDD = dailyDoubles.has(key);
+  current = { c, r, value: tileValue(r), isDD, wager: null };
+  const ci = boardCats[c];
+  const [clueText, answer] = BANK[ci].clues[r];
+
+  document.getElementById('ddBanner').style.display = isDD ? 'block' : 'none';
+  document.getElementById('clueCat').textContent = BANK[ci].cat;
+  document.getElementById('clueValue').textContent = isDD ? '' : '$' + current.value;
+  document.getElementById('answerText').textContent = answer;
+  document.getElementById('answerText').classList.remove('shown');
+  document.getElementById('awardArea').style.display = 'none';
+
+  const clueEl = document.getElementById('clueText');
+  clueEl.textContent = clueText;
+
+  if(isDD){
+    clueEl.style.display = 'none';
+    document.getElementById('revealBtns').style.display = 'none';
+    document.getElementById('wagerBox').style.display = 'flex';
+    const maxScore = Math.max(round === 2 ? 2000 : 1000, ...teams.map(t=>t.score));
+    document.getElementById('wagerInput').value = '';
+    document.getElementById('wagerInput').placeholder = 'Max $' + maxScore.toLocaleString();
+  } else {
+    clueEl.style.display = 'block';
+    document.getElementById('wagerBox').style.display = 'none';
+    document.getElementById('revealBtns').style.display = 'flex';
+    startTimer();
+  }
+  document.getElementById('clue').classList.add('active');
+}
+
+function lockWager(){
+  const v = parseInt(document.getElementById('wagerInput').value, 10);
+  const maxScore = Math.max(round === 2 ? 2000 : 1000, ...teams.map(t=>t.score));
+  if(isNaN(v) || v < 0){ return; }
+  current.wager = Math.min(v, maxScore);
+  document.getElementById('wagerBox').style.display = 'none';
+  document.getElementById('clueValue').textContent = '$' + current.wager.toLocaleString() + ' on the line';
+  document.getElementById('clueText').style.display = 'block';
+  document.getElementById('revealBtns').style.display = 'flex';
+  startTimer();
+}
+
+function revealAnswer(){
+  hideTimer();
+  document.getElementById('answerText').classList.add('shown');
+  document.getElementById('revealBtns').style.display = 'none';
+  buildAwardGrid();
+  document.getElementById('awardArea').style.display = 'block';
+}
+
+function buildAwardGrid(){
+  const grid = document.getElementById('awardGrid');
+  grid.innerHTML = '';
+  teams.forEach((t,i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'award-team';
+    wrap.innerHTML =
+      '<div class="award-label">'+esc(t.name)+'</div>' +
+      '<div class="award-pair">' +
+        '<button class="mbtn correct" onclick="award('+i+',1)">&#10003;</button>' +
+        '<button class="mbtn wrong" onclick="award('+i+',-1)">&#10007;</button>' +
+      '</div>';
+    grid.appendChild(wrap);
+  });
+}
+
+function award(i, sign){
+  if(isFinalRound){
+    teams[i].score += sign * teams[i].finalWager;
+    teams[i].finalDone = true;
+    renderScores();
+    if(teams.every(t=>t.finalDone)) { showWinner(); }
+    return;
+  }
+  const amt = current.isDD ? current.wager : current.value;
+  teams[i].score += sign * amt;
+  renderScores();
+  if(sign === 1){ closeClue(); }
+}
+
+function closeClue(){
+  hideTimer();
+  document.getElementById('clue').classList.remove('active');
+  if(isFinalRound){ showWinner(); return; }
+  if(current){
+    const tile = document.getElementById('tile-'+current.c+'-'+current.r);
+    if(tile && !tile.classList.contains('used')){
+      tile.classList.add('used');
+      tilesLeft--;
+    }
+    current = null;
+  }
+  // Show round options once the board is mostly played (or immediately if you
+  // want to cut the round short after a few tiles).
+  if(tilesLeft <= (boardCats.length * 5) - 3){
+    const wrap = document.getElementById('nextRoundWrap');
+    wrap.classList.add('show');
+    // hide round 2 option if already in round 2 or not enough categories left
+    document.getElementById('round2Btn').style.display =
+      (round === 1 && BANK.length - spentCats.size >= 5) ? 'block' : 'none';
+  }
+}
+
+// ================= ROUND 2 =================
+function startRound2(){
+  round = 2;
+  toPicker();
+}
+
+// ================= FINAL JEOPARDY =================
+function startFinal(){
+  isFinalRound = true;
+  teams.forEach(t=>{ t.finalWager = null; t.finalDone = false; });
+  askWager(0);
+}
+
+function askWager(i){
+  if(i >= teams.length){ showFinalClue(); return; }
+  const t = teams[i];
+  const max = Math.max(0, t.score);
+  const val = window.prompt(t.name + ', Final Jeopardy wager (max $' + max.toLocaleString() + '):', '0');
+  let w = parseInt(val, 10);
+  if(isNaN(w) || w < 0) w = 0;
+  t.finalWager = Math.min(w, max);
+  askWager(i+1);
+}
+
+function showFinalClue(){
+  current = { isDD:false, value:0 };
+  hideTimer();
+  document.getElementById('ddBanner').style.display = 'none';
+  document.getElementById('clueCat').textContent = 'Final Jeopardy: ' + FINAL.cat;
+  document.getElementById('clueValue').textContent = '';
+  document.getElementById('wagerBox').style.display = 'none';
+  const clueEl = document.getElementById('clueText');
+  clueEl.textContent = FINAL.clue;
+  clueEl.style.display = 'block';
+  document.getElementById('answerText').textContent = FINAL.answer;
+  document.getElementById('answerText').classList.remove('shown');
+  document.getElementById('revealBtns').style.display = 'flex';
+  document.getElementById('awardArea').style.display = 'none';
+  document.getElementById('clue').classList.add('active');
+  startTimer();
+}
+
+function showWinner(){
+  hideTimer();
+  document.getElementById('clue').classList.remove('active');
+  const sorted = [...teams].sort((a,b)=>b.score-a.score);
+  document.getElementById('winnerName').textContent = sorted[0].name;
+  document.getElementById('finalScores').innerHTML =
+    sorted.map(t=>esc(t.name)+': $'+t.score.toLocaleString()).join('<br>');
+  document.getElementById('winner').classList.add('active');
+}
+</script>
+</body>
+</html>
