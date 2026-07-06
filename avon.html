@@ -10,7 +10,7 @@
 <meta name="description" content="Live tides, surf, weather, UV index, and wind for Avon, NC on Hatteras Island. Refreshed every 5 minutes.">
 <meta property="og:title" content="Avon Beach Report 🎣">
 <meta property="og:description" content="Live tides, surf, weather, UV index & wind for Avon, NC">
-<meta property="og:image" content="https://matthewcasello.github.io/obx-2026/photos/img_166944877.jpeg">
+<meta property="og:image" content="https://matthewcasello.github.io/obx-2026/photos/img_166944883.jpeg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -358,7 +358,7 @@
     </div>
 
     <div class="card full" id="camCard" style="display:none">
-      <h2><span class="ico">📷</span> Surf Cam <span class="cam-loc">Avon Fishing Pier · Surfchex live</span></h2>
+      <h2><span class="ico">📷</span> Surf Cam <span class="cam-loc">Avon Fishing Pier · tap to watch live</span></h2>
       <a id="camLink" href="https://www.surfchex.com/cams/avon/" target="_blank" rel="noopener" class="cam-wrap">
         <img id="camImg" alt="Avon Pier cam" loading="lazy">
         <span class="cam-badge">▶ Watch Live</span>
@@ -714,7 +714,7 @@ async function renderCam() {
   } catch (e) {
     // No snapshot feed yet: show the card with a static preview so the
     // live-cam link is still one tap away
-    document.getElementById('camImg').src = 'photos/img_166944877.jpeg';
+    document.getElementById('camImg').src = 'photos/img_166944883.jpeg';
     document.getElementById('camTime').textContent = 'tap for live view';
     card.style.display = '';
   }
