@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7cb8d6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Avon Beach Report</title>
+<meta name="description" content="Live tides, surf, weather, UV index, and wind for Avon, NC on Hatteras Island. Refreshed every 5 minutes.">
+<meta property="og:title" content="Avon Beach Report 🎣">
+<meta property="og:description" content="Live tides, surf, weather, UV index & wind for Avon, NC">
+<meta property="og:image" content="https://matthewcasello.github.io/obx-2026/photos/img_166944877.jpeg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0e7490;
+    --ocean-deep: #155e75;
+    --sky: #38bdf8;
+    --sand: #fef3c7;
+    --ink: #0f172a;
+    --ink-soft: #475569;
+    --card: rgba(255,255,255,0.92);
+    --radius: 20px;
+    --shadow: 0 8px 30px rgba(15,23,42,0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 40%, #fffbeb 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 420px;
+    background: url('hero.jpg') center 14% / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(7,40,68,0.25) 0%, rgba(7,40,68,0.05) 35%, rgba(7,40,68,0.62) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 28px 24px 30px;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .hero-loc h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+  .hero-loc .sub { font-size: 1.05rem; font-weight: 400; opacity: 0.92; margin-top: 2px; }
+  .hero-now { text-align: right; }
+  .hero-temp {
+    font-size: clamp(3.4rem, 9vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .hero-cond { font-size: 1.2rem; font-weight: 500; margin-top: 4px; }
+  .hero-feels { font-size: 0.95rem; opacity: 0.9; margin-top: 2px; }
+  .hero-chips { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; flex-wrap: wrap; }
+  .chip {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1060px; margin: -26px auto 0; padding: 0 16px 40px; position: relative; z-index: 2; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    min-width: 0; /* let cards shrink below content width (hourly strip blowout) */
+  }
+  .card.full { grid-column: 1 / -1; }
+  .card h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .card h2 .ico { font-size: 1.1rem; }
+
+  /* ---------- Tides ---------- */
+  .tide-hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-bottom: 8px; }
+  .tide-next { font-size: 1.7rem; font-weight: 700; color: var(--ocean-deep); }
+  .tide-count { font-size: 1.05rem; color: var(--ink-soft); font-weight: 500; }
+  #tideChart { width: 100%; height: auto; display: block; margin-top: 4px; }
+  .tide-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .tide-pill {
+    background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+    border: 1px solid #bae6fd;
+    border-radius: 14px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .tide-pill.past { opacity: 0.45; }
+  .tide-pill .tt { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); }
+  .tide-pill .tv { font-size: 1.25rem; font-weight: 700; margin-top: 2px; }
+  .tide-pill .th { font-size: 0.8rem; color: var(--ink-soft); }
+
+  /* ---------- UV ---------- */
+  .uv-wrap { display: flex; flex-direction: column; align-items: center; }
+  .uv-gauge { width: 170px; height: 100px; }
+  .uv-val { font-size: 2.6rem; font-weight: 800; line-height: 1; margin-top: -54px; }
+  .uv-label { font-weight: 700; font-size: 1rem; margin-top: 4px; }
+  .uv-max { color: var(--ink-soft); font-size: 0.88rem; margin-top: 8px; }
+  .uv-advice { font-size: 0.85rem; color: var(--ink-soft); text-align: center; margin-top: 8px; line-height: 1.45; }
+  .uv-hourly {
+    display: flex; align-items: flex-end; justify-content: center; gap: 4px;
+    width: 100%; height: 86px; margin-top: 16px;
+    padding-top: 10px; border-top: 1px solid #e2e8f0;
+  }
+  .uvh-col { flex: 1 1 0; max-width: 26px; display: flex; flex-direction: column; align-items: center; gap: 3px; height: 100%; justify-content: flex-end; }
+  .uvh-num { font-size: 0.62rem; font-weight: 700; color: var(--ink-soft); line-height: 1; }
+  .uvh-bar { width: 100%; border-radius: 4px 4px 2px 2px; min-height: 3px; transition: height 0.8s ease; }
+  .uvh-col.now .uvh-bar { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .uvh-col.now .uvh-lbl { color: var(--ink); font-weight: 800; }
+  .uvh-lbl { font-size: 0.6rem; font-weight: 600; color: #94a3b8; line-height: 1; white-space: nowrap; }
+
+  /* ---------- Wind ---------- */
+  .wind-wrap { display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .compass { width: 120px; height: 120px; }
+  .wind-stats .ws-big { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+  .wind-stats .ws-big span { font-size: 1rem; font-weight: 500; color: var(--ink-soft); }
+  .wind-stats .ws-dir { font-size: 1.1rem; font-weight: 700; color: var(--ocean-deep); margin-top: 4px; }
+  .wind-stats .ws-gust { font-size: 0.88rem; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- Sun / details ---------- */
+  .detail-rows { display: flex; flex-direction: column; gap: 12px; }
+  .drow { display: flex; justify-content: space-between; align-items: center; font-size: 0.98rem; }
+  .drow .dl { color: var(--ink-soft); display: flex; align-items: center; gap: 8px; }
+  .drow .dv { font-weight: 700; }
+
+  /* ---------- Hourly ---------- */
+  .hourly {
+    display: flex; gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .hr-item {
+    flex: 0 0 64px;
+    text-align: center;
+    padding: 10px 4px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f0f9ff, #fffbeb);
+    border: 1px solid #e0f2fe;
+  }
+  .hr-item.now { background: linear-gradient(180deg, #0e7490, #155e75); color: #fff; border-color: var(--ocean-deep); }
+  .hr-item.now .hr-uv { color: #fde68a; }
+  .hr-t { font-size: 0.75rem; font-weight: 600; opacity: 0.8; }
+  .hr-i { font-size: 1.3rem; margin: 4px 0; }
+  .hr-temp { font-size: 0.95rem; font-weight: 700; }
+  .hr-uv { font-size: 0.7rem; font-weight: 700; margin-top: 3px; color: var(--ink-soft); }
+
+  /* ---------- Alerts & callout ---------- */
+  .alert-banner {
+    background: #fffbeb; border: 1px solid #fcd34d; color: #92400e;
+    border-radius: 14px; padding: 11px 16px; margin-bottom: 12px;
+    font-size: 0.9rem; font-weight: 600; box-shadow: var(--shadow);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .alert-banner.severe { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
+  .alert-banner .ab-area { font-weight: 400; opacity: 0.8; font-size: 0.82rem; }
+  .callout {
+    background: linear-gradient(120deg, #0e7490, #0891b2 60%, #06b6d4);
+    color: #fff;
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px;
+  }
+  .callout .co-ico { font-size: 2rem; }
+  .callout .co-big { font-size: 1.18rem; font-weight: 700; }
+  .callout .co-sub { font-size: 0.92rem; opacity: 0.88; margin-top: 2px; }
+
+  /* ---------- Ocean ---------- */
+  .ocean-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .ostat {
+    text-align: center; padding: 14px 8px; border-radius: 14px;
+    background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+    border: 1px solid #bae6fd;
+  }
+  .ostat .ol { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ocean); }
+  .ostat .ov { font-size: 1.7rem; font-weight: 800; color: var(--ocean-deep); margin-top: 4px; line-height: 1.1; }
+  .ostat .os { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+
+  /* ---------- Surf cam ---------- */
+  .cam-loc { font-weight: 500; text-transform: none; letter-spacing: 0; margin-left: auto; font-size: 0.78rem; color: #94a3b8; }
+  .cam-wrap { position: relative; display: block; border-radius: 14px; overflow: hidden; }
+  .cam-wrap img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; background: #0f172a; }
+  .cam-wrap::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 65%, rgba(7,40,68,0.55));
+    pointer-events: none;
+  }
+  .cam-badge {
+    position: absolute; bottom: 12px; left: 12px; z-index: 1;
+    background: rgba(239,68,68,0.92); color: #fff;
+    font-size: 0.82rem; font-weight: 700;
+    padding: 6px 14px; border-radius: 999px;
+    transition: transform 0.15s ease;
+  }
+  .cam-wrap:hover .cam-badge { transform: scale(1.06); }
+  .cam-time {
+    position: absolute; bottom: 14px; right: 14px; z-index: 1;
+    color: rgba(255,255,255,0.92); font-size: 0.78rem; font-weight: 600;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+
+  /* ---------- 7-day ---------- */
+  .daily { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .day-card {
+    text-align: center; padding: 12px 4px 10px; border-radius: 14px;
+    background: linear-gradient(180deg, #f0f9ff, #fffbeb);
+    border: 1px solid #e0f2fe;
+  }
+  .day-card.today { background: linear-gradient(180deg, #0e7490, #155e75); color: #fff; border-color: var(--ocean-deep); }
+  .day-card.today .dy-lo, .day-card.today .dy-wind { color: rgba(255,255,255,0.75); }
+  .day-card.today .dy-rain { color: #bae6fd; }
+  .dy-name { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .dy-ico { font-size: 1.5rem; margin: 6px 0 4px; }
+  .dy-hi { font-size: 1.15rem; font-weight: 800; }
+  .dy-lo { font-size: 0.88rem; font-weight: 600; color: var(--ink-soft); }
+  .dy-rain { font-size: 0.75rem; font-weight: 700; color: var(--ocean); margin-top: 5px; }
+  .dy-uv { font-size: 0.7rem; font-weight: 800; margin-top: 4px; }
+  .dy-uv span { display: inline-block; padding: 1px 7px; border-radius: 999px; color: #fff; }
+  .dy-wind { font-size: 0.72rem; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    max-width: 1060px; margin: 0 auto; padding: 0 16px 44px;
+    text-align: center; color: var(--ink-soft); font-size: 0.8rem; line-height: 1.7;
+  }
+  footer a { color: var(--ocean); text-decoration: none; }
+  .updated {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--card); border-radius: 999px; padding: 6px 16px;
+    box-shadow: var(--shadow); font-weight: 600; color: var(--ink-soft); font-size: 0.82rem;
+    margin-bottom: 10px;
+  }
+  .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+  .err {
+    background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c;
+    border-radius: 12px; padding: 10px 14px; font-size: 0.88rem; margin-bottom: 14px;
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .hero { min-height: 310px; background-position: center 30%; }
+    .hero-now { text-align: left; }
+    .hero-chips { justify-content: flex-start; }
+    .hero-content { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 18px 26px; }
+    .wrap { padding: 0 10px 32px; margin-top: -22px; }
+    .card { padding: 16px 14px; border-radius: 16px; }
+    .tide-hero { gap: 4px 12px; margin-bottom: 4px; }
+    .tide-next { font-size: 1.3rem; }
+    .tide-count { font-size: 0.95rem; }
+    .tide-table { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .tide-pill { padding: 8px 10px; }
+    .tide-pill .tv { font-size: 1.1rem; }
+    .uv-hourly { gap: 3px; height: 78px; }
+    .uvh-num { font-size: 0.58rem; }
+    .wind-wrap { gap: 14px; }
+    .compass { width: 104px; height: 104px; }
+    .hr-item { flex: 0 0 58px; }
+    .ocean-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .ostat .ov { font-size: 1.45rem; }
+    .daily { display: flex; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .day-card { flex: 0 0 96px; }
+    .callout { padding: 14px 16px; gap: 12px; }
+    .callout .co-big { font-size: 1.02rem; }
+    .callout .co-sub { font-size: 0.85rem; }
+    footer { padding: 0 14px 36px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-loc">
+      <h1>Avon, NC&nbsp;🎣</h1>
+      <div class="sub" id="dateLine">Loading…</div>
+    </div>
+    <div class="hero-now">
+      <div class="hero-temp"><span id="curTemp">--</span>°</div>
+      <div class="hero-cond" id="curCond">—</div>
+      <div class="hero-feels" id="curFeels"></div>
+      <div class="hero-chips">
+        <div class="chip" id="chipHi">H --°</div>
+        <div class="chip" id="chipLo">L --°</div>
+        <div class="chip" id="chipRain">💧 --%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="err" id="errBox"></div>
+  <div id="alerts"></div>
+  <div class="grid">
+
+    <div class="card full callout" id="bestWindow" style="display:none">
+      <span class="co-ico">🏖️</span>
+      <div>
+        <div class="co-big" id="bwTitle"></div>
+        <div class="co-sub" id="bwDetail"></div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">🌊</span> Tides — Cape Hatteras Fishing Pier (NOAA 8654400)</h2>
+      <div class="tide-hero">
+        <div class="tide-next" id="tideNext">—</div>
+        <div class="tide-count" id="tideCount"></div>
+      </div>
+      <svg id="tideChart" viewBox="0 0 1000 240"></svg>
+      <div class="tide-table" id="tideTable"></div>
+    </div>
+
+    <div class="card full" id="camCard" style="display:none">
+      <h2><span class="ico">📷</span> Surf Cam <span class="cam-loc">Avon Fishing Pier · Surfchex live</span></h2>
+      <a id="camLink" href="https://www.surfchex.com/cams/avon/" target="_blank" rel="noopener" class="cam-wrap">
+        <img id="camImg" alt="Avon Pier cam" loading="lazy">
+        <span class="cam-badge">▶ Watch Live</span>
+        <span class="cam-time" id="camTime"></span>
+      </a>
+    </div>
+
+    <div class="card full" id="oceanCard" style="display:none">
+      <h2><span class="ico">🏄</span> Water &amp; Surf</h2>
+      <div class="ocean-stats">
+        <div class="ostat"><div class="ol">Water Temp</div><div class="ov" id="seaTemp">--°</div><div class="os" id="seaFeel"></div></div>
+        <div class="ostat"><div class="ol">Wave Height</div><div class="ov" id="waveHt">--</div><div class="os">feet</div></div>
+        <div class="ostat"><div class="ol">Wave Period</div><div class="ov" id="wavePd">--</div><div class="os">seconds</div></div>
+        <div class="ostat"><div class="ol">Swell From</div><div class="ov" id="waveDir">--</div><div class="os" id="waveDirDeg"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">☀️</span> UV Index</h2>
+      <div class="uv-wrap">
+        <svg class="uv-gauge" viewBox="0 0 200 110">
+          <path d="M 16 100 A 84 84 0 0 1 184 100" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+          <path id="uvArc" d="M 16 100 A 84 84 0 0 1 184 100" fill="none" stroke="#4ade80" stroke-width="14" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="264" style="transition: stroke-dashoffset 1s ease, stroke 1s ease"/>
+        </svg>
+        <div class="uv-val" id="uvVal">–</div>
+        <div class="uv-label" id="uvLabel"></div>
+        <div class="uv-max" id="uvMax"></div>
+        <div class="uv-advice" id="uvAdvice"></div>
+        <div class="uv-hourly" id="uvHourly"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">🌬️</span> Wind</h2>
+      <div class="wind-wrap">
+        <svg class="compass" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="#f0f9ff" stroke="#bae6fd" stroke-width="2"/>
+          <text x="60" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">N</text>
+          <text x="109" y="64" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">E</text>
+          <text x="60" y="113" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">S</text>
+          <text x="11" y="64" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8">W</text>
+          <g id="windArrow" style="transform-origin: 60px 60px; transition: transform 1s ease">
+            <path d="M 60 24 L 68 56 L 60 50 L 52 56 Z" fill="#0e7490"/>
+            <line x1="60" y1="52" x2="60" y2="92" stroke="#0e7490" stroke-width="4" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="wind-stats">
+          <div class="ws-big"><span id="windSpd">--</span> <span>mph</span></div>
+          <div class="ws-dir" id="windDir">—</div>
+          <div class="ws-gust" id="windGust"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="ico">🌅</span> Sun &amp; Sky</h2>
+      <div class="detail-rows">
+        <div class="drow"><span class="dl">🌅 Sunrise</span><span class="dv" id="sunrise">--</span></div>
+        <div class="drow"><span class="dl">🌇 Sunset</span><span class="dv" id="sunset">--</span></div>
+        <div class="drow"><span class="dl">💧 Humidity</span><span class="dv" id="humidity">--</span></div>
+        <div class="drow"><span class="dl">🌧️ Rain chance</span><span class="dv" id="rainChance">--</span></div>
+        <div class="drow"><span class="dl"><span id="moonIco">🌙</span> Moon</span><span class="dv" id="moonPhase">--</span></div>
+        <div class="drow"><span class="dl">✨ Illumination</span><span class="dv" id="moonIllum">--</span></div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">🕐</span> Next 12 Hours</h2>
+      <div class="hourly" id="hourly"></div>
+    </div>
+
+    <div class="card full">
+      <h2><span class="ico">📅</span> 7-Day Forecast</h2>
+      <div class="daily" id="daily"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="updated"><span class="pulse"></span> <span id="updated">Loading…</span> · auto-refreshes every 5 min</div><br>
+  Tides: <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8654400" target="_blank" rel="noopener">NOAA — nearest ocean-side station</a>
+  · Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+</footer>
+
+<script>
+const LAT = 35.3496, LON = -75.5090, STATION = '8654400';
+
+const WMO = {
+  0:['☀️','Sunny'],1:['🌤️','Mostly Sunny'],2:['⛅','Partly Cloudy'],3:['☁️','Cloudy'],
+  45:['🌫️','Foggy'],48:['🌫️','Foggy'],
+  51:['🌦️','Light Drizzle'],53:['🌦️','Drizzle'],55:['🌧️','Heavy Drizzle'],
+  56:['🌧️','Freezing Drizzle'],57:['🌧️','Freezing Drizzle'],
+  61:['🌧️','Light Rain'],63:['🌧️','Rain'],65:['🌧️','Heavy Rain'],
+  66:['🌧️','Freezing Rain'],67:['🌧️','Freezing Rain'],
+  71:['🌨️','Light Snow'],73:['🌨️','Snow'],75:['❄️','Heavy Snow'],77:['🌨️','Snow Grains'],
+  80:['🌦️','Light Showers'],81:['🌧️','Showers'],82:['⛈️','Heavy Showers'],
+  85:['🌨️','Snow Showers'],86:['🌨️','Snow Showers'],
+  95:['⛈️','Thunderstorm'],96:['⛈️','Thunderstorm'],99:['⛈️','Severe Thunderstorm']
+};
+const wmo = c => WMO[c] || ['🌡️','—'];
+
+const COMPASS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+const cardinal = d => COMPASS[Math.round(d / 22.5) % 16];
+
+const fmtTime = d => d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'}).toLowerCase().replace(' ','');
+const pad = n => String(n).padStart(2,'0');
+const yyyymmdd = d => `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+const parseLocal = s => new Date(s.replace(' ','T'));  // NOAA "YYYY-MM-DD HH:mm" → local
+
+function uvInfo(v) {
+  if (v < 3)  return ['#22c55e','Low','Minimal protection needed. Enjoy!'];
+  if (v < 6)  return ['#eab308','Moderate','SPF 30+, hat & sunglasses recommended.'];
+  if (v < 8)  return ['#f97316','High','SPF 30+, reapply every 2h. Seek shade midday.'];
+  if (v < 11) return ['#ef4444','Very High','Extra protection — shade 10am–4pm, SPF 50.'];
+  return ['#a855f7','Extreme','Avoid midday sun. SPF 50+, cover up.'];
+}
+
+async function fetchWeather() {
+  const u = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
+    `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,relative_humidity_2m` +
+    `&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset,precipitation_probability_max,weather_code,wind_speed_10m_max,wind_direction_10m_dominant` +
+    `&hourly=temperature_2m,uv_index,weather_code,precipitation_probability,wind_speed_10m` +
+    `&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York&forecast_days=7`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('weather ' + r.status);
+  return r.json();
+}
+
+async function fetchMarine() {
+  const u = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}` +
+    `&current=sea_surface_temperature,wave_height,wave_period,wave_direction` +
+    `&temperature_unit=fahrenheit&length_unit=imperial&timezone=America%2FNew_York`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('marine ' + r.status);
+  return r.json();
+}
+
+async function fetchAlerts() {
+  const r = await fetch(`https://api.weather.gov/alerts/active?point=${LAT},${LON}`);
+  if (!r.ok) throw new Error('alerts ' + r.status);
+  return r.json();
+}
+
+async function fetchTides(product, interval) {
+  const begin = new Date(Date.now() - 24*3600*1000);
+  let u = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?station=${STATION}` +
+    `&product=${product}&datum=MLLW&time_zone=lst_ldt&units=english&format=json` +
+    `&begin_date=${yyyymmdd(begin)}&range=72`;
+  if (interval) u += `&interval=${interval}`;
+  const r = await fetch(u);
+  if (!r.ok) throw new Error('tides ' + r.status);
+  const j = await r.json();
+  if (!j.predictions) throw new Error('tides: no data');
+  return j.predictions;
+}
+
+function renderWeather(w) {
+  const c = w.current, d = w.daily;
+  const [icon, label] = wmo(c.weather_code);
+
+  document.getElementById('dateLine').textContent =
+    new Date().toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}) + ' · Beach Report';
+  document.getElementById('curTemp').textContent = Math.round(c.temperature_2m);
+  document.getElementById('curCond').textContent = `${icon} ${label}`;
+  document.getElementById('curFeels').textContent = `Feels like ${Math.round(c.apparent_temperature)}°`;
+  document.getElementById('chipHi').textContent = `H ${Math.round(d.temperature_2m_max[0])}°`;
+  document.getElementById('chipLo').textContent = `L ${Math.round(d.temperature_2m_min[0])}°`;
+  document.getElementById('chipRain').textContent = `💧 ${d.precipitation_probability_max[0] ?? 0}%`;
+
+  // UV
+  const uv = Math.round(c.uv_index * 10) / 10;
+  const uvShown = Math.round(uv);
+  const [color, lbl, advice] = uvInfo(uvShown);
+  const frac = Math.min(uv / 11, 1);
+  const arc = document.getElementById('uvArc');
+  arc.style.strokeDashoffset = 264 * (1 - frac);
+  arc.style.stroke = color;
+  const uvEl = document.getElementById('uvVal');
+  uvEl.textContent = uvShown;
+  uvEl.style.color = color;
+  document.getElementById('uvLabel').textContent = lbl;
+  document.getElementById('uvLabel').style.color = color;
+  document.getElementById('uvMax').textContent = `Today's max: ${Math.round(d.uv_index_max[0])}`;
+  document.getElementById('uvAdvice').textContent = advice;
+
+  // Hourly UV bars — 7am to 7pm today
+  const uvBox = document.getElementById('uvHourly');
+  uvBox.innerHTML = '';
+  const nowHour = new Date().getHours();
+  w.hourly.time.forEach((t, i) => {
+    const dt = new Date(t);
+    if (dt.toDateString() !== new Date().toDateString()) return;
+    const h = dt.getHours();
+    if (h < 7 || h > 19) return;
+    const v = w.hourly.uv_index[i];
+    const [barColor] = uvInfo(Math.round(v));
+    const col = document.createElement('div');
+    col.className = 'uvh-col' + (h === nowHour ? ' now' : '');
+    const hl = h === 12 ? '12p' : h > 12 ? (h-12) + 'p' : h + 'a';
+    col.innerHTML = `
+      <div class="uvh-num">${Math.round(v) || ''}</div>
+      <div class="uvh-bar" style="height:${Math.max(Math.min(v/11,1)*100*0.62, 4)}%; background:${barColor}"></div>
+      <div class="uvh-lbl">${hl}</div>`;
+    uvBox.appendChild(col);
+  });
+
+  // Wind — arrow shows direction wind is blowing TOWARD
+  document.getElementById('windSpd').textContent = Math.round(c.wind_speed_10m);
+  document.getElementById('windDir').textContent = `from ${cardinal(c.wind_direction_10m)} (${Math.round(c.wind_direction_10m)}°)`;
+  document.getElementById('windGust').textContent = `Gusts ${Math.round(c.wind_gusts_10m)} mph`;
+  document.getElementById('windArrow').style.transform = `rotate(${(c.wind_direction_10m + 180) % 360}deg)`;
+
+  // Sun & sky
+  document.getElementById('sunrise').textContent = fmtTime(new Date(d.sunrise[0]));
+  document.getElementById('sunset').textContent = fmtTime(new Date(d.sunset[0]));
+  document.getElementById('humidity').textContent = `${c.relative_humidity_2m}%`;
+  document.getElementById('rainChance').textContent = `${d.precipitation_probability_max[0] ?? 0}%`;
+
+  // Hourly strip — next 12 hours
+  const now = new Date();
+  const hh = w.hourly;
+  let startIdx = hh.time.findIndex(t => new Date(t) >= now) - 1;
+  if (startIdx < 0) startIdx = 0;
+  const box = document.getElementById('hourly');
+  box.innerHTML = '';
+  for (let i = startIdx; i < Math.min(startIdx + 13, hh.time.length); i++) {
+    const t = new Date(hh.time[i]);
+    const [hi] = wmo(hh.weather_code[i]);
+    const isNow = i === startIdx;
+    const div = document.createElement('div');
+    div.className = 'hr-item' + (isNow ? ' now' : '');
+    div.innerHTML = `
+      <div class="hr-t">${isNow ? 'Now' : t.toLocaleTimeString('en-US',{hour:'numeric'}).toLowerCase()}</div>
+      <div class="hr-i">${hi}</div>
+      <div class="hr-temp">${Math.round(hh.temperature_2m[i])}°</div>
+      <div class="hr-uv">UV ${Math.round(hh.uv_index[i])}</div>`;
+    box.appendChild(div);
+  }
+}
+
+function renderDaily(w) {
+  const d = w.daily;
+  const box = document.getElementById('daily');
+  box.innerHTML = '';
+  d.time.forEach((t, i) => {
+    const dt = parseLocal(t + 'T12:00');
+    const [icon] = wmo(d.weather_code[i]);
+    const uvMax = Math.round(d.uv_index_max[i]);
+    const [uvColor] = uvInfo(uvMax);
+    const div = document.createElement('div');
+    div.className = 'day-card' + (i === 0 ? ' today' : '');
+    div.innerHTML = `
+      <div class="dy-name">${i === 0 ? 'Today' : dt.toLocaleDateString('en-US',{weekday:'short'})}</div>
+      <div class="dy-ico">${icon}</div>
+      <div class="dy-hi">${Math.round(d.temperature_2m_max[i])}°</div>
+      <div class="dy-lo">${Math.round(d.temperature_2m_min[i])}°</div>
+      <div class="dy-rain">💧 ${d.precipitation_probability_max[i] ?? 0}%</div>
+      <div class="dy-uv"><span style="background:${uvColor}">UV ${uvMax}</span></div>
+      <div class="dy-wind">${Math.round(d.wind_speed_10m_max[i])} mph ${cardinal(d.wind_direction_10m_dominant[i])}</div>`;
+    box.appendChild(div);
+  });
+}
+
+function renderOcean(m) {
+  if (!m || !m.current) return;
+  const c = m.current;
+  document.getElementById('oceanCard').style.display = '';
+  const wt = Math.round(c.sea_surface_temperature);
+  document.getElementById('seaTemp').textContent = wt + '°';
+  document.getElementById('seaFeel').textContent =
+    wt >= 72 ? 'great for swimming' : wt >= 65 ? 'refreshing' : wt >= 58 ? 'brisk — wetsuit weather' : 'cold!';
+  document.getElementById('waveHt').textContent = c.wave_height.toFixed(1);
+  document.getElementById('wavePd').textContent = Math.round(c.wave_period);
+  document.getElementById('waveDir').textContent = cardinal(c.wave_direction);
+  document.getElementById('waveDirDeg').textContent = Math.round(c.wave_direction) + '°';
+}
+
+function renderAlerts(a) {
+  const box = document.getElementById('alerts');
+  box.innerHTML = '';
+  if (!a || !a.features) return;
+  const seen = new Set();
+  a.features.forEach(f => {
+    const p = f.properties;
+    if (seen.has(p.event)) return;
+    seen.add(p.event);
+    const severe = ['Severe','Extreme'].includes(p.severity);
+    const div = document.createElement('div');
+    div.className = 'alert-banner' + (severe ? ' severe' : '');
+    div.innerHTML = `<span>${severe ? '🚨' : '⚠️'} ${p.event}</span>` +
+      `<span class="ab-area">until ${p.ends ? fmtTime(new Date(p.ends)) : 'further notice'}</span>`;
+    div.title = p.headline || '';
+    box.appendChild(div);
+  });
+}
+
+function renderBestWindow(w) {
+  // Score each beach-hour (8am-7pm); find the best 3h stretch today (or tomorrow if evening)
+  const now = new Date();
+  const hh = w.hourly;
+  const candidates = [];
+  hh.time.forEach((t, i) => {
+    const dt = new Date(t);
+    const h = dt.getHours();
+    if (h < 8 || h > 19 || dt < now) return;
+    const dayOffset = Math.floor((dt - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+    if (dayOffset > 1) return;  // today + tomorrow only
+    let score = 100;
+    score -= (hh.precipitation_probability[i] ?? 0) * 0.8;            // rain is the dealbreaker
+    score -= Math.abs(hh.temperature_2m[i] - 80) * 1.4;               // 80° is beach-perfect
+    score -= Math.max(hh.wind_speed_10m[i] - 14, 0) * 2;              // sandblasting penalty
+    candidates.push({ dt, i, score, dayOffset });
+  });
+  const el = document.getElementById('bestWindow');
+  // need a 3h run within the same day
+  let best = null;
+  for (let j = 0; j + 2 < candidates.length; j++) {
+    const [a, b, c] = [candidates[j], candidates[j+1], candidates[j+2]];
+    if (c.i - a.i !== 2 || a.dayOffset !== c.dayOffset) continue;
+    const total = a.score + b.score + c.score;
+    if (!best || total > best.total) best = { start: a, end: c, total };
+  }
+  if (!best) { el.style.display = 'none'; return; }
+  const s = best.start, e = best.end;
+  const fmtH = d => d.toLocaleTimeString('en-US', {hour:'numeric'}).toLowerCase();
+  const endT = new Date(e.dt.getTime() + 3600000);
+  const midI = best.start.i + 1;
+  document.getElementById('bwTitle').textContent =
+    `Best beach window${s.dayOffset === 1 ? ' tomorrow' : ''}: ${fmtH(s.dt)} – ${fmtH(endT)}`;
+  document.getElementById('bwDetail').textContent =
+    `${Math.round(hh.temperature_2m[midI])}° · UV ${Math.round(hh.uv_index[midI])} · ` +
+    `${hh.precipitation_probability[midI] ?? 0}% rain · wind ${Math.round(hh.wind_speed_10m[midI])} mph`;
+  el.style.display = '';
+}
+
+const CAM_RAW = 'https://raw.githubusercontent.com/matthewcasello/obx-2026/cam';
+
+async function renderCam() {
+  // Snapshot pushed every 5 min by the home server; hide the card if it goes stale
+  const card = document.getElementById('camCard');
+  try {
+    const r = await fetch(`${CAM_RAW}/meta.json?t=${Date.now()}`);
+    if (!r.ok) throw new Error('no meta');
+    const meta = await r.json();
+    const age = Date.now()/1000 - meta.updated;
+    if (age > 3 * 3600) throw new Error('stale');  // >3h old → camera feed is down
+    document.getElementById('camImg').src = `${CAM_RAW}/snapshot.jpg?t=${meta.updated}`;
+    const mins = Math.max(Math.round(age/60), 0);
+    document.getElementById('camTime').textContent =
+      mins < 2 ? 'just now' : mins < 60 ? `${mins} min ago` : `${Math.round(mins/60)}h ago`;
+    card.style.display = '';
+  } catch (e) {
+    // No snapshot feed yet: show the card with a static preview so the
+    // live-cam link is still one tap away
+    document.getElementById('camImg').src = 'photos/img_166944877.jpeg';
+    document.getElementById('camTime').textContent = 'tap for live view';
+    card.style.display = '';
+  }
+}
+
+function renderMoon() {
+  // Phase from days since known new moon (2000-01-06 18:14 UTC), synodic month 29.53059d
+  const synodic = 29.530588853;
+  // 2000-01-06 18:14 UTC new moon = 10962.76 days after the Unix epoch
+  const age = ((Date.now()/86400000 - 10962.76) % synodic + synodic) % synodic;
+  const illum = Math.round((1 - Math.cos(2 * Math.PI * age / synodic)) / 2 * 100);
+  const phases = [
+    [1.85, '🌑', 'New Moon'], [5.54, '🌒', 'Waxing Crescent'], [9.23, '🌓', 'First Quarter'],
+    [12.92, '🌔', 'Waxing Gibbous'], [16.61, '🌕', 'Full Moon'], [20.30, '🌖', 'Waning Gibbous'],
+    [23.99, '🌗', 'Last Quarter'], [27.68, '🌘', 'Waning Crescent'], [99, '🌑', 'New Moon'],
+  ];
+  const [, ico, name] = phases.find(p => age < p[0]);
+  document.getElementById('moonIco').textContent = ico;
+  document.getElementById('moonPhase').textContent = name;
+  document.getElementById('moonIllum').textContent = illum + '%';
+}
+
+function renderTides(hilo, curve, sunTimes) {
+  const now = new Date();
+  const events = hilo.map(p => ({ t: parseLocal(p.t), v: parseFloat(p.v), type: p.type }));
+
+  // Next tide + countdown
+  const next = events.find(e => e.t > now);
+  if (next) {
+    const mins = Math.round((next.t - now) / 60000);
+    const hrs = Math.floor(mins / 60), rem = mins % 60;
+    document.getElementById('tideNext').textContent =
+      `${next.type === 'H' ? 'High' : 'Low'} tide at ${fmtTime(next.t)}`;
+    document.getElementById('tideCount').textContent =
+      `in ${hrs ? hrs + 'h ' : ''}${rem}m · ${next.v.toFixed(1)} ft`;
+  }
+
+  // Today's tide pills
+  const today = now.toDateString();
+  const table = document.getElementById('tideTable');
+  table.innerHTML = '';
+  events.filter(e => e.t.toDateString() === today).forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'tide-pill' + (e.t < now ? ' past' : '');
+    div.innerHTML = `
+      <div class="tt">${e.type === 'H' ? '▲ High' : '▼ Low'}</div>
+      <div class="tv">${fmtTime(e.t)}</div>
+      <div class="th">${e.v.toFixed(1)} ft</div>`;
+    table.appendChild(div);
+  });
+
+  tideState = { events, curve };
+  drawTideChart();
+}
+
+let tideState = null;
+
+function drawTideChart() {
+  if (!tideState) return;
+  const { events, curve } = tideState;
+  const now = new Date();
+  const svg = document.getElementById('tideChart');
+  const cw = svg.clientWidth || svg.parentElement.clientWidth || 1000;
+  const narrow = cw < 560;
+
+  // Shorter window on phones so the curve stays readable
+  const back = narrow ? 4 : 6, fwd = narrow ? 12 : 18;
+  const t0 = now.getTime() - back*3600*1000, t1 = now.getTime() + fwd*3600*1000;
+  const pts = curve
+    .map(p => ({ t: parseLocal(p.t).getTime(), v: parseFloat(p.v) }))
+    .filter(p => p.t >= t0 && p.t <= t1);
+  if (!pts.length) return;
+
+  // Draw at the element's real size so text is never stretched
+  const W = cw, H = narrow ? 190 : 240, PADT = 26, PADB = 30;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.style.height = H + 'px';
+  const vmin = Math.min(...pts.map(p => p.v)), vmax = Math.max(...pts.map(p => p.v));
+  const x = t => (t - t0) / (t1 - t0) * W;
+  const y = v => PADT + (1 - (v - vmin) / (vmax - vmin || 1)) * (H - PADT - PADB);
+
+  let path = `M ${x(pts[0].t).toFixed(1)} ${y(pts[0].v).toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) path += ` L ${x(pts[i].t).toFixed(1)} ${y(pts[i].v).toFixed(1)}`;
+  const area = path + ` L ${x(pts[pts.length-1].t).toFixed(1)} ${H} L ${x(pts[0].t).toFixed(1)} ${H} Z`;
+  const clampX = v => Math.max(26, Math.min(W - 26, v));  // keep labels on-canvas
+
+  let inner = `
+    <defs>
+      <linearGradient id="tideFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0e7490" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.06"/>
+      </linearGradient>
+    </defs>
+    <path d="${area}" fill="url(#tideFill)"/>
+    <path d="${path}" fill="none" stroke="#0e7490" stroke-width="3" stroke-linecap="round"/>`;
+
+  // Hour labels every 4h — skip ones that would collide with a low-tide marker label
+  const lowMarkerXs = events.filter(e => e.type === 'L' && e.t.getTime() >= t0 && e.t.getTime() <= t1).map(e => x(e.t.getTime()));
+  for (let t = Math.ceil(t0 / (4*3600*1000)) * 4*3600*1000; t <= t1; t += 4*3600*1000) {
+    if (lowMarkerXs.some(mx => Math.abs(mx - x(t)) < (narrow ? 44 : 56))) continue;
+    const lbl = new Date(t).toLocaleTimeString('en-US', {hour:'numeric'}).toLowerCase();
+    inner += `<text x="${x(t).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="${narrow ? 12 : 13}" fill="#64748b" font-family="Outfit,sans-serif">${lbl}</text>`;
+  }
+
+  // High/low markers within window
+  events.filter(e => e.t.getTime() >= t0 && e.t.getTime() <= t1).forEach(e => {
+    const ex = x(e.t.getTime()), ey = y(e.v);
+    const above = e.type === 'H';
+    inner += `
+      <circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="5" fill="${above ? '#0e7490' : '#f59e0b'}" stroke="#fff" stroke-width="2"/>
+      <text x="${clampX(ex).toFixed(1)}" y="${(above ? ey - 12 : ey + 22).toFixed(1)}" text-anchor="middle" font-size="${narrow ? 12 : 13}" font-weight="700" fill="#334155" font-family="Outfit,sans-serif">${fmtTime(e.t)}</text>`;
+  });
+
+  // NOW marker
+  const nx = x(now.getTime());
+  inner += `
+    <line x1="${nx.toFixed(1)}" y1="${PADT-12}" x2="${nx.toFixed(1)}" y2="${H-PADB}" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="${clampX(nx).toFixed(1)}" y="${PADT-15}" text-anchor="middle" font-size="12" font-weight="800" fill="#ef4444" font-family="Outfit,sans-serif">NOW</text>`;
+
+  svg.innerHTML = inner;
+}
+
+async function refresh() {
+  const err = document.getElementById('errBox');
+  try {
+    const [weather, hilo, curve, marine, alerts] = await Promise.all([
+      fetchWeather(),
+      fetchTides('predictions', 'hilo'),
+      fetchTides('predictions', null),
+      fetchMarine().catch(() => null),   // nice-to-haves: never block the core report
+      fetchAlerts().catch(() => null),
+    ]);
+    renderWeather(weather);
+    renderTides(hilo, curve);
+    renderDaily(weather);
+    renderBestWindow(weather);
+    renderOcean(marine);
+    renderAlerts(alerts);
+    renderMoon();
+    renderCam();
+    err.style.display = 'none';
+    document.getElementById('updated').textContent =
+      'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+  } catch (e) {
+    err.textContent = '⚠️ Trouble reaching ' + (String(e.message).includes('tides') ? 'NOAA tide service' : 'weather service') + ' — will retry in 5 minutes. (' + e.message + ')';
+    err.style.display = 'block';
+  }
+}
+
+refresh();
+setInterval(refresh, 5 * 60 * 1000);
+// Also refresh when tab regains focus (e.g., phone wake)
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+// Redraw tide chart at new size on rotate/resize
+let rsTimer;
+window.addEventListener('resize', () => { clearTimeout(rsTimer); rsTimer = setTimeout(drawTideChart, 150); });
+</script>
+</body>
+</html>
