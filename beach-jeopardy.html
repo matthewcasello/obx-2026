@@ -38,10 +38,13 @@ function startHostPeer(){
     new QRCode(document.getElementById('qrCode'), {text:url, width:200, height:200});
   });
   hostPeer.on('connection', conn=>{
-    conn.on('open', ()=>{
-      conn.send({type:'hello', teams: teams.map(t=>t.name)});
-    });
+    // PeerJS race: incoming connections can already be open before the
+    // 'open' handler attaches, so send hello both ways and on request.
+    const sendHello = ()=>{ try{ conn.send({type:'hello', teams: teams.map(t=>t.name)}); }catch(e){} };
+    if(conn.open){ sendHello(); } else { conn.on('open', sendHello); }
+    setTimeout(sendHello, 800);  // belt and suspenders
     conn.on('data', d=>{
+      if(d.type === 'hi'){ sendHello(); }
       if(d.type === 'join'){
         conn._pname = d.name; conn._pteam = d.team;
         buzzConns.push(conn);
@@ -105,6 +108,16 @@ function initBuzzerClient(hostId){
   const peer = new Peer();
   peer.on('open', ()=>{
     clientConn = peer.connect(hostId);
+    clientConn.on('open', ()=>{
+      clientConn.send({type:'hi'});
+      // retry if the team list hasn't arrived
+      let tries = 0;
+      const iv = setInterval(()=>{
+        const sel = document.getElementById('playerTeam');
+        if(sel.options.length > 0 || ++tries > 5){ clearInterval(iv); return; }
+        try{ clientConn.send({type:'hi'}); }catch(e){}
+      }, 1200);
+    });
     clientConn.on('data', d=>{
       if(d.type === 'hello'){
         const sel = document.getElementById('playerTeam');
@@ -179,10 +192,13 @@ function startHostPeer(){
     new QRCode(document.getElementById('qrCode'), {text:url, width:200, height:200});
   });
   hostPeer.on('connection', conn=>{
-    conn.on('open', ()=>{
-      conn.send({type:'hello', teams: teams.map(t=>t.name)});
-    });
+    // PeerJS race: incoming connections can already be open before the
+    // 'open' handler attaches, so send hello both ways and on request.
+    const sendHello = ()=>{ try{ conn.send({type:'hello', teams: teams.map(t=>t.name)}); }catch(e){} };
+    if(conn.open){ sendHello(); } else { conn.on('open', sendHello); }
+    setTimeout(sendHello, 800);  // belt and suspenders
     conn.on('data', d=>{
+      if(d.type === 'hi'){ sendHello(); }
       if(d.type === 'join'){
         conn._pname = d.name; conn._pteam = d.team;
         buzzConns.push(conn);
@@ -246,6 +262,16 @@ function initBuzzerClient(hostId){
   const peer = new Peer();
   peer.on('open', ()=>{
     clientConn = peer.connect(hostId);
+    clientConn.on('open', ()=>{
+      clientConn.send({type:'hi'});
+      // retry if the team list hasn't arrived
+      let tries = 0;
+      const iv = setInterval(()=>{
+        const sel = document.getElementById('playerTeam');
+        if(sel.options.length > 0 || ++tries > 5){ clearInterval(iv); return; }
+        try{ clientConn.send({type:'hi'}); }catch(e){}
+      }, 1200);
+    });
     clientConn.on('data', d=>{
       if(d.type === 'hello'){
         const sel = document.getElementById('playerTeam');
@@ -538,6 +564,8 @@ if(BUZZ_JOIN){ initBuzzerClient(BUZZ_JOIN); }
         <div class="picker-sub" id="pickerSub">Choose 5 or 6 from the bank of 30</div>
       </div>
       <div class="picker-actions">
+        <button class="small-btn" id="tab1" onclick="setPhase(1)" style="background:var(--coral)">Beach</button>
+        <button class="small-btn" id="tab2" onclick="setPhase(2)">Phase 2: Hard Mode</button>
         <button class="small-btn" onclick="randomPick()">Surprise Me</button>
         <button class="small-btn go" id="startBoardBtn" onclick="startBoard()" disabled>Start (0)</button>
       </div>
@@ -881,6 +909,43 @@ const BANK = [
 ["Cory and Topanga's coming-of-age sitcom merges with Blizzard's massive online game.","What is Boy Meets World of Warcraft?"],
 ["The Tanner family's full sitcom merges with Frank Underwood's ruthless political drama.","What is Full House of Cards?"]]}
 ,
+{cat:"U.S. Presidents",clues:[
+["He was the only president to serve more than two terms.","Who is Franklin D. Roosevelt?"],
+["This president served two non-consecutive terms, making him both the 22nd and 24th.","Who is Grover Cleveland?"],
+["The teddy bear is named for this president after he spared a bear on a hunt.","Who is Theodore Roosevelt?"],
+["He was president for just 31 days, the shortest tenure, after catching pneumonia in 1841.","Who is William Henry Harrison?"],
+["The only president to also serve as Chief Justice of the Supreme Court.","Who is William Howard Taft?"]]},
+{cat:"Shakespeare",clues:[
+["'To be or not to be' is pondered by this Danish prince.","Who is Hamlet?"],
+["This play's star-crossed lovers hail from the houses of Montague and Capulet.","What is Romeo and Juliet?"],
+["Three witches prophesy this Scottish general will be king.","Who is Macbeth?"],
+["'Et tu, Brute?' are the dying words in this Roman tragedy.","What is Julius Caesar?"],
+["This comedy set in an enchanted forest features Puck and a weaver named Bottom.","What is A Midsummer Night's Dream?"]]},
+{cat:"Ancient History",clues:[
+["This wonder of the ancient world at Giza is the only one still standing.","What is the Great Pyramid?"],
+["Hannibal famously crossed the Alps with these animals to attack Rome.","What are elephants?"],
+["In 79 AD this volcano buried Pompeii in ash.","What is Mount Vesuvius?"],
+["This queen, the last active pharaoh of Egypt, allied with Caesar and Antony.","Who is Cleopatra?"],
+["The Code of this Babylonian king is one of the oldest written legal codes, eye for an eye included.","Who is Hammurabi?"]]},
+{cat:"Rhyme Time",clues:[
+["A crustacean crime boss.","What is a lobster mobster?"],
+["An overweight feline.","What is a fat cat?"],
+["A comical rabbit.","What is a funny bunny?"],
+["A fake horse noise.","What is a phony pony (neigh)?"],
+["A boring choo-choo.","What is a plain train?"]]},
+{cat:"Body of Knowledge",clues:[
+["This organ, the body's largest, is the one you can see.","What is the skin?"],
+["The femur, the body's longest bone, is found here.","What is the thigh?"],
+["These tiny air sacs in the lungs are where oxygen enters the blood.","What are alveoli?"],
+["The stapes, the smallest bone in the body, is found in this organ.","What is the ear?"],
+["This four-chambered pump moves about 2,000 gallons of blood a day.","What is the heart?"]]},
+{cat:"Potpourri",clues:[
+["The three primary colors of light are red, blue, and this.","What is green?"],
+["This is the only mammal capable of true sustained flight.","What is a bat?"],
+["A group of crows is ominously called this.","What is a murder?"],
+["This planet spins on its side, rolling around the sun at a 98-degree tilt.","What is Uranus?"],
+["Scrabble's highest-value letters, worth 10 points each, are Q and this.","What is Z?"]]}
+,
 {cat:"Sunset Sessions",clues:[
 ["The sun sets in this compass direction.","What is west?"],
 ["This is the term for the brief flash of green light sometimes seen just as the sun dips below the ocean.","What is the green flash?"],
@@ -888,6 +953,12 @@ const BANK = [
 ["Red skies at night are this person's delight, per the old rhyme.","Who is a sailor?"],
 ["Sunsets look red because air molecules scatter away this color of light first.","What is blue?"]]}
 ];
+
+const PHASE2 = new Set(["1990s Movies","1990s Culture","1990s Sports Events","1990s Toys",
+"Saturday Morning Cartoons","Gotta Catch 'Em All","2000s Bangers","The Early Internet",
+"Blockbuster Nights","Wizarding World","Science","World Geography","Potent Potables","Before & After",
+"U.S. Presidents","Shakespeare","Ancient History","Rhyme Time","Body of Knowledge","Potpourri"]);
+let pickerPhase = 1;
 
 const VALUES = [200, 400, 600, 800, 1000];
 const FINAL = {
@@ -991,15 +1062,25 @@ function toPicker(){
   document.getElementById('pickerTitle').textContent =
     round === 1 ? 'Pick Your Categories' : 'Round 2: Pick Again';
   document.getElementById('pickerSub').textContent =
-    'Choose 5 or 6 from the bank of ' + (BANK.length - spentCats.size) + ' remaining';
+    'Pick 5 or 6. Beach = classic, Phase 2 = 90s throwbacks & show-style';
   renderPicker();
   switchScreen('picker');
 }
+
+function setPhase(p){
+  pickerPhase = p;
+  document.getElementById('tab1').style.background = p===1 ? 'var(--coral)' : 'var(--ocean)';
+  document.getElementById('tab2').style.background = p===2 ? 'var(--coral)' : 'var(--ocean)';
+  renderPicker();
+}
+
+function catPhase(i){ return PHASE2.has(BANK[i].cat) ? 2 : 1; }
 
 function renderPicker(){
   const grid = document.getElementById('catGrid');
   grid.innerHTML = '';
   BANK.forEach((b,i)=>{
+    if(catPhase(i) !== pickerPhase) return;
     const btn = document.createElement('button');
     btn.className = 'pick' + (spentCats.has(i) ? ' spent' : '') + (picked.has(i) ? ' sel' : '');
     btn.textContent = b.cat;
@@ -1017,7 +1098,7 @@ function renderPicker(){
 
 function randomPick(){
   picked = new Set();
-  const avail = BANK.map((_,i)=>i).filter(i=>!spentCats.has(i));
+  const avail = BANK.map((_,i)=>i).filter(i=>!spentCats.has(i) && catPhase(i)===pickerPhase);
   while(picked.size < Math.min(6, avail.length)){
     picked.add(avail[Math.floor(Math.random()*avail.length)]);
   }
@@ -1344,10 +1425,13 @@ function startHostPeer(){
     new QRCode(document.getElementById('qrCode'), {text:url, width:200, height:200});
   });
   hostPeer.on('connection', conn=>{
-    conn.on('open', ()=>{
-      conn.send({type:'hello', teams: teams.map(t=>t.name)});
-    });
+    // PeerJS race: incoming connections can already be open before the
+    // 'open' handler attaches, so send hello both ways and on request.
+    const sendHello = ()=>{ try{ conn.send({type:'hello', teams: teams.map(t=>t.name)}); }catch(e){} };
+    if(conn.open){ sendHello(); } else { conn.on('open', sendHello); }
+    setTimeout(sendHello, 800);  // belt and suspenders
     conn.on('data', d=>{
+      if(d.type === 'hi'){ sendHello(); }
       if(d.type === 'join'){
         conn._pname = d.name; conn._pteam = d.team;
         buzzConns.push(conn);
@@ -1411,6 +1495,16 @@ function initBuzzerClient(hostId){
   const peer = new Peer();
   peer.on('open', ()=>{
     clientConn = peer.connect(hostId);
+    clientConn.on('open', ()=>{
+      clientConn.send({type:'hi'});
+      // retry if the team list hasn't arrived
+      let tries = 0;
+      const iv = setInterval(()=>{
+        const sel = document.getElementById('playerTeam');
+        if(sel.options.length > 0 || ++tries > 5){ clearInterval(iv); return; }
+        try{ clientConn.send({type:'hi'}); }catch(e){}
+      }, 1200);
+    });
     clientConn.on('data', d=>{
       if(d.type === 'hello'){
         const sel = document.getElementById('playerTeam');
